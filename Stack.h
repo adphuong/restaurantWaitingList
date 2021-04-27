@@ -1,7 +1,8 @@
 #ifndef STACK_H
-#ifndef STACK_H
+#define STACK_H
 #include "ContactInfo.h"
 
+const int CAPACITY = 101;
 class Stack {
 	public:
 		Stack();
@@ -20,9 +21,9 @@ class Stack {
 		const char * getEmail() const;
 
 	private:
-		ContactInfo * persons[];	
+		ContactInfo * persons[CAPACITY];	
 		int size;
 
-		void copy(Node * fromHead, Node *& toHead, Node *& toTail);
-		void destroy(Node *& first);
 };
+
+#endif

@@ -26,7 +26,7 @@ class Queue {
 				rear = nullptr;
 			}
 			~Node() {
-				delete groupData;
+				delete data;
 			}
 
 			Group * data;
@@ -40,3 +40,5 @@ class Queue {
 		void destroy(Node *& first);
 };
 
+
+#endif
