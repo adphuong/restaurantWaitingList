@@ -17,7 +17,7 @@ class Group {
 		Group(const Group & aGroup);
 		~Group();
 
-		Group& operator= (const Group &aGroup);
+		Group& operator= (const Group &toBeCopied);
 
 		const char * getGroupName() const;
 		int getNumPeople() const;

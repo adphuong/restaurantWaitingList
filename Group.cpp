@@ -36,6 +36,24 @@ void Group::init(const char * gName, int num, bool isSpecial, const char *
 	isOptInPromos = isOptPromos;
 }
 
+
+Group &Group::operator=(const Group &toBeCopied) {
+	if (this == &toBeCopied) {
+		return *this;
+	}
+
+	if (this->groupName) {
+		delete [] this->groupName;
+	}
+
+	if (this->specialSeatingInfo) {
+		delete [] this->specialSeatingInfo;
+	}
+
+	init(toBeCopied.groupName, toBeCopied.numPeople, toBeCopied.isSpecialSeating,
+		 toBeCopied.specialSeatingInfo, toBeCopied.isOptInPromos);
+}
+
 // For testing purposes
 ostream& operator<< (ostream& out, const Group& aGroup) {
 	out << "Group name: " << aGroup.groupName << endl
