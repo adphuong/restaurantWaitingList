@@ -52,6 +52,28 @@ Group &Group::operator=(const Group &toBeCopied) {
 
 	init(toBeCopied.groupName, toBeCopied.numPeople, toBeCopied.isSpecialSeating,
 		 toBeCopied.specialSeatingInfo, toBeCopied.isOptInPromos);
+	
+	return *this;
+}
+
+const char * Group::getGroupName() const {
+	return groupName;
+}
+
+int Group::getNumPeople() const {
+	return numPeople;
+}
+
+bool Group::getSpecialSeating() const {
+	return isSpecialSeating;
+}
+
+const char * Group::getSpecialSeatingInfo() const {
+	return specialSeatingInfo;
+}
+
+bool Group::getOptInPromos() const {
+	return isOptInPromos;
 }
 
 // For testing purposes
