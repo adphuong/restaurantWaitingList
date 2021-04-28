@@ -12,18 +12,14 @@ using namespace std;
 class ContactInfo {
 	public:
 		ContactInfo();
-		ContactInfo(char gName[], int numContactInfos, bool isSpecial, char
-			  		specialInfo[], bool optInPromos);
-		ContactInfo(const ContactInfo &aPerson);
+		ContactInfo(char nameToInit[], char emailToInit[]);
+		ContactInfo(const ContactInfo & aPerson);
 		~ContactInfo();
 
-		ContactInfo& operator= (const ContactInfo &aPerson);
+		ContactInfo& operator= (const ContactInfo & aPerson);
 
-		const char * getContactInfoName() const;
-		int getNumPeople() const;
-		bool getSpecialSeating() const;
-		const char * getSpecialSeatingInfo() const;
-		bool getOptInPromos() const;
+		const char * getFullName() const;
+		const char * getEmail() const;
 
 		friend ostream& operator<< (ostream & out, const ContactInfo & aPerson);
 
@@ -31,8 +27,8 @@ class ContactInfo {
 		char * fullName;
 		char * email;
 
-		void init(const char * gName, int num, bool isSpecial, const char *
-				  specialSeatInfo, bool isOptPromos);
+		void init(const char * nameToInit, const char * emailToInit);
+
 };
 
 #endif

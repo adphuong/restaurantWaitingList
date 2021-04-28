@@ -34,10 +34,9 @@ class Group {
 		char * specialSeatingInfo;
 		bool isOptInPromos;
 
-		void init(const char * gName, int num, bool isSpecial, const char *
-				  specialSeatInfo, bool isOptPromos);
+		void init(const char * gName, int num, bool isSpecial, 
+				  const char * specialSeatInfo, bool isOptPromos);
 };
 
-ostream& operator<< (ostream& out, const Group& aGroup);
 
 #endif

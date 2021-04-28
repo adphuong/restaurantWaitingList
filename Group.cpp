@@ -21,8 +21,8 @@ Group::~Group() {
 	}
 }
 
-void Group::init(const char * gName, int num, bool isSpecial, const char *
-				 specialSeatInfo, bool isOptPromos) {
+void Group::init(const char * gName, int num, bool isSpecial, 
+				 const char * specialSeatInfo, bool isOptPromos) {
 	groupName = new char[strlen(gName) + 1];
 	strcpy(groupName, gName);
 
@@ -76,7 +76,7 @@ bool Group::getOptInPromos() const {
 	return isOptInPromos;
 }
 
-// For testing purposes
+// For testing purposes, need to edit printing layout
 ostream& operator<< (ostream& out, const Group& aGroup) {
 	out << "Group name: " << aGroup.groupName << endl
 		<< "Num People: " << aGroup.numPeople << endl
