@@ -131,22 +131,20 @@ void Queue::addToQueue(Group & aGroup) {
 
 
 bool Queue::enqueue(const Group & aGroup) {
-	Node * front = head;
-	Node * rear = tail;
 	Node * newNode = new Node(aGroup);
 	bool isAdded = false;
 
-	if (!front) {
+	if (!head) {
 		head = tail = newNode;
 		head->next = tail->next = head;
 		
 		isAdded = true;
 	}
 	else {
-		rear->next = newNode;
-		rear = newNode;
+		tail->next = newNode;
+		tail = newNode;
 
-		rear->next = head;
+		tail->next = head;
 
 		isAdded = true;
 	}
