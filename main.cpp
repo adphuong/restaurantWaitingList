@@ -3,15 +3,15 @@
 int MAX = 101;
 int main() {
 	Queue aQueue;
-	int count;
+	int pos;
 	char command;
 	char filename[] = "queueData.txt";
 
 	welcome();
 	aQueue.loadData(filename);
 
-	count = aQueue.getSize();
-	successLoad(count);
+	pos = aQueue.getSize();
+	successLoad(pos);
 
 	cout << aQueue << endl;
 
@@ -19,7 +19,7 @@ int main() {
 	command = getCommand();
 
 	while (command != 'q') {
-		execute(command, aQueue, count);
+		execute(command, aQueue, pos);
 		displayMenu();
 		command = getCommand();
 	}
@@ -82,14 +82,14 @@ char getCommand() {
 }
 
 
-void execute(char input, Queue & aQueue, int count) {
+void execute(char input, Queue & aQueue, int & pos) {
 	switch (input) {
 		case 'a':
-			addToWaitlist(aQueue, count);
+			addToWaitlist(aQueue, pos);
 			break;
 		
 		case 'b':
-			seatGroup(aQueue);
+			seatGroup(aQueue, pos);
 			break;
 /*
 		case 'c':
@@ -112,7 +112,7 @@ void execute(char input, Queue & aQueue, int count) {
 }
 
 
-void addToWaitlist(Queue & aQueue, int pos) {
+void addToWaitlist(Queue & aQueue, int & pos) {
 	char groupName[MAX_CHAR];
 	int num;
 	bool specialSeating;
@@ -204,8 +204,8 @@ void addToWaitlist(Queue & aQueue, int pos) {
 }
 
 
-void seatGroup(Queue & aQueue) {
-	bool isSeated = aQueue.dequeue();
+void seatGroup(Queue & aQueue, int & pos) {
+	bool isSeated = aQueue.dequeue(pos);
 	
 	if (isSeated) {
 		cout << "The group has been seated!" << endl << endl;

@@ -14,7 +14,7 @@ class Queue {
 	 	
 		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
-		bool dequeue();
+		bool dequeue(int & pos);
 		bool peek(Queue & aQueue) const;
 		bool isEmpty(Queue & aQueue) const;
 		//void display(Queue & aQueue) const;

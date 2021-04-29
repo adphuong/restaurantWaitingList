@@ -155,9 +155,9 @@ bool Queue::enqueue(const Group & aGroup) {
 }
 
 
-bool Queue::dequeue() {
+bool Queue::dequeue(int & pos) {
 	bool result = false;
-	int pos;
+	int newPos;
 	Node * curr;
 
 	if (head) {
@@ -172,13 +172,15 @@ bool Queue::dequeue() {
 		else {
 			head = head->next;
 			tail->next = head;			// THIS BUG TOOK FOREVER TO FIX
+
+			--pos;
 		}
 
 		// Update positions for groups currently in waitlist
 		curr = head;
 		while (curr->next != head) {
-			pos = curr->data->getPosition();
-			curr->data->setPosition(--pos);
+			newPos = curr->data->getPosition();
+			curr->data->setPosition(--newPos);
 
 			curr = curr->next;
 
@@ -187,13 +189,14 @@ bool Queue::dequeue() {
 		} 
 	
 		// Updates the last node's position
-		pos = curr->data->getPosition();
-		curr->data->setPosition(--pos);
+		newPos = curr->data->getPosition();
+		curr->data->setPosition(--newPos);
 
 		// Delete the first node
 		nodeToDelete->next = nullptr;
 		delete nodeToDelete;
 		nodeToDelete = nullptr;
+		
 
 		result = true;
 	}
