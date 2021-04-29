@@ -76,6 +76,7 @@ void Queue::loadData(const char * filename) {
 
 void Queue::addToQueue(Group & aGroup) {
 	Node * temp = nullptr;
+	Node * headRef = head;
 	Node * prev;
 	Node * curr;
 	Node * nodeToAdd = new Node(aGroup);
@@ -84,6 +85,9 @@ void Queue::addToQueue(Group & aGroup) {
 		head = nodeToAdd;
 		tail = nodeToAdd;
 
+		head->next = head;
+		tail->next = head;
+
 		++size;
 	}
 	else {
@@ -91,6 +95,8 @@ void Queue::addToQueue(Group & aGroup) {
 			temp = head;
 			head = nodeToAdd;
 			head->next = temp;
+		
+			tail->next = head;
 
 			++size;
 		}
@@ -103,8 +109,9 @@ void Queue::addToQueue(Group & aGroup) {
 		else {
 			prev = head;
 			curr = head->next;
-
-			while (curr != nullptr) {
+			
+			// while (Curr != nullptr)
+			while (curr != headRef) {
 				if (nodeToAdd->data->getPosition() < curr->data->getPosition())
 				{
 					prev->next = nodeToAdd;
@@ -124,23 +131,55 @@ void Queue::addToQueue(Group & aGroup) {
 
 
 bool Queue::enqueue(const Group & aGroup) {
+	Node * front = head;
 	Node * rear = tail;
 	Node * newNode = new Node(aGroup);
 	bool isAdded = false;
 
-	if (!rear) {
+	if (!front) {
 		head = tail = newNode;
+		head->next = tail->next = head;
+		
 		isAdded = true;
 	}
 	else {
 		rear->next = newNode;
 		rear = newNode;
+
+		rear->next = head;
+
 		isAdded = true;
 	}
 
 	return isAdded;
 }
 
+
+bool Queue::dequeue() {
+	bool result = false;
+
+	if (head) {
+		// Not empty, remove from front
+		Node * nodeToDelete = tail->next; 
+
+		// Special Case: one node in queue
+		if (head == tail) {
+			head = nullptr;
+			tail = nullptr;
+		}
+		else {
+			head = head->next;
+			tail->next = head;			// THIS BUG TOOK FOREVER TO FIX
+		}
+
+		nodeToDelete->next = nullptr;
+		delete nodeToDelete;
+		nodeToDelete = nullptr;
+
+		result = true;
+	}
+	return result;
+}
 
 
 ostream & operator<< (ostream & out, const Queue & aQueue) {
@@ -150,7 +189,7 @@ ostream & operator<< (ostream & out, const Queue & aQueue) {
 }
 
 void Queue::printAll(ostream & out) const {
-	Node *curr = head;
+	Node * curr = head;
 
 	cout << setfill(' ') << setw(8) << left << "#"
 		 << setw(20) << left << "GROUP NAME" 
@@ -160,10 +199,20 @@ void Queue::printAll(ostream & out) const {
 		 << setw(20) << left << "OPT-IN PROMOS" << endl;
 
 	cout << setfill('-') << setw(100) << "-" << endl;
+	
+	while (head != nullptr) {
+		out << *(curr->data) << endl;
+		curr = curr->next;
 
-	for (curr = head; curr; curr = curr->next) {
+		if (curr == head)
+			break;
+	}
+
+	/*
+	for (curr = head; curr->next != headRef; curr = curr->next) {
 		out << *(curr->data) << endl;
 	}
+	*/
 
 	cout << setfill('-') << setw(100) << "-" << endl;
 

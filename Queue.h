@@ -14,7 +14,7 @@ class Queue {
 	 	
 		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
-		bool dequeue(Group & aGroup);
+		bool dequeue();
 		bool peek(Queue & aQueue) const;
 		bool isEmpty(Queue & aQueue) const;
 		//void display(Queue & aQueue) const;
@@ -39,7 +39,6 @@ class Queue {
 
 		Node *head, *tail;
 		int size;
-
 		
 		void addToQueue(Group & aGroup);
 		void printAll(ostream & out) const;

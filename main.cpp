@@ -87,10 +87,11 @@ void execute(char input, Queue & aQueue, int count) {
 		case 'a':
 			addToWaitlist(aQueue, count);
 			break;
-		/*
+		
 		case 'b':
-			seatGroup(aQueue);
+			aQueue.dequeue();
 			break;
+/*
 		case 'c':
 			checkNextGroup(aQueue);
 			break;
