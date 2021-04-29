@@ -3,6 +3,8 @@
 
 #include "Group.h"
 
+const int MAX_CHAR = 101;
+
 class Queue {
 	public:
 		Queue();
@@ -10,7 +12,7 @@ class Queue {
 		
 		Queue& operator= (const Queue & aQueue);
 	 	
-		void loadData(const char * filename);
+		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
 		bool dequeue(Group & aGroup);
 		bool peek(Group &aGroup) const;
@@ -19,24 +21,30 @@ class Queue {
 
 		int getSize() const;
 
+		friend ostream& operator<< (ostream & out, const Queue & aQueue);
+
 	private:
 		struct Node {
 			Node(const Group & aGroup) {
 				data = new Group(aGroup);
-				rear = nullptr;
+				next = nullptr;
 			}
 			~Node() {
 				delete data;
 			}
 
 			Group * data;
-			Node * rear;
+			Node * next;
 		};
 
 		Node *head, *tail;
 		int size;
 
-		void copy(Node * fromHead, Node *& toHead, Node *& toTail);
+		
+		void addToQueue(Group & aGroup);
+		void printAll(ostream & out) const;
+
+		void copy(Node * fromHead, Node *& toHead);
 		void destroy(Node *& first);
 };
 

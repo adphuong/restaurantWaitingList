@@ -12,13 +12,14 @@ using namespace std;
 class Group {
 	public:
 		Group();
-		Group(char gName[], int numPersons, bool isSpecial, char specialInfo[], 
+		Group(int pos, char gName[], int numPersons, bool isSpecial, char specialInfo[], 
 			 bool optInPromos);
 		Group(const Group & aGroup);
 		~Group();
 
 		Group& operator= (const Group &toBeCopied);
-
+		
+		int getPosition() const;
 		const char * getGroupName() const;
 		int getNumPeople() const;
 		bool getSpecialSeating() const;
@@ -28,13 +29,14 @@ class Group {
 		friend ostream& operator<< (ostream & out, const Group & aGroup);
 
 	private:
+		int position;
 		char * groupName;
 		int numPeople;
 		bool isSpecialSeating;
 		char * specialSeatingInfo;
 		bool isOptInPromos;
 
-		void init(const char * gName, int num, bool isSpecial, 
+		void init(int pos, const char * gName, int num, bool isSpecial, 
 				  const char * specialSeatInfo, bool isOptPromos);
 };
 

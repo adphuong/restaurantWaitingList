@@ -14,6 +14,7 @@
 #include "Stack.h"
 using namespace std;
 
-
+void welcome();
+void successLoad(int size);
 
 #endif

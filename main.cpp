@@ -2,7 +2,16 @@
 
 int MAX = 101;
 int main() {
-	
+	Queue aQueue;
+
+	char filename[] = "queueData.txt";
+
+	aQueue.loadData(filename);
+	successLoad(aQueue.getSize());
+
+	cout << aQueue << endl;
+
+	/* TESTING FOR CONTACTINFO
 	char fullName[MAX] = "April Phuong";
 	char email[MAX] = "aprilphuong@gmail.com";
 	
@@ -28,7 +37,7 @@ int main() {
 	cout << aPerson.getFullName() << endl
 		 << aPerson.getEmail() << endl;
 
-
+	*/
 	/*	TESTING FOR GROUP CLASS
 	char name[] = "Test Name";
 	int num = 5;
@@ -63,4 +72,20 @@ int main() {
 	*/
 
 	return 0;
+}
+
+
+void welcome() {
+	cout << endl;
+
+	cout << "Hello! Welcome to My Fancy Restaurant." << endl;
+}
+
+
+void successLoad(int size) {
+	cout << endl
+		 << setfill('*') << setw(100) << "*" << endl
+		 << "There are currently " << size << " groups ahead of you." << endl
+		 << setfill('*') << setw(100) << "*" 
+		 << endl << endl;
 }

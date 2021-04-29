@@ -1,16 +1,16 @@
 #include "Group.h"
 
-Group::Group() : groupName(nullptr), numPeople(0), isSpecialSeating(false),
+Group::Group() : position(0), groupName(nullptr), numPeople(0), isSpecialSeating(false),
 				 specialSeatingInfo(nullptr), isOptInPromos(false) {}
 
-Group::Group(char gName[], int numPersons, bool isSpecial, char specialInfo[], 
+Group::Group(int pos, char gName[], int numPersons, bool isSpecial, char specialInfo[], 
 			 bool optInPromos) {
-	init(gName, numPersons, isSpecial, specialInfo, optInPromos);
+	init(pos, gName, numPersons, isSpecial, specialInfo, optInPromos);
 }
 
 
 Group::Group(const Group & aGroup) {
-	init(aGroup.groupName, aGroup.numPeople, aGroup.isSpecialSeating,
+	init(aGroup.position, aGroup.groupName, aGroup.numPeople, aGroup.isSpecialSeating,
 		 aGroup.specialSeatingInfo, aGroup.isOptInPromos);
 }
 
@@ -21,8 +21,10 @@ Group::~Group() {
 	}
 }
 
-void Group::init(const char * gName, int num, bool isSpecial, 
+void Group::init(int pos, const char * gName, int num, bool isSpecial, 
 				 const char * specialSeatInfo, bool isOptPromos) {
+	position = pos;
+
 	groupName = new char[strlen(gName) + 1];
 	strcpy(groupName, gName);
 
@@ -50,10 +52,14 @@ Group &Group::operator=(const Group &toBeCopied) {
 		delete [] this->specialSeatingInfo;
 	}
 
-	init(toBeCopied.groupName, toBeCopied.numPeople, toBeCopied.isSpecialSeating,
-		 toBeCopied.specialSeatingInfo, toBeCopied.isOptInPromos);
+	init(toBeCopied.position, toBeCopied.groupName, toBeCopied.numPeople, 
+		 toBeCopied.isSpecialSeating, toBeCopied.specialSeatingInfo, toBeCopied.isOptInPromos);
 	
 	return *this;
+}
+
+int Group::getPosition() const {
+	return position;
 }
 
 const char * Group::getGroupName() const {
@@ -78,13 +84,31 @@ bool Group::getOptInPromos() const {
 
 // For testing purposes, need to edit printing layout
 ostream& operator<< (ostream& out, const Group& aGroup) {
-	out << "Group name: " << aGroup.groupName << endl
-		<< "Num People: " << aGroup.numPeople << endl
-		<< "Special Seating? " << aGroup.isSpecialSeating << endl
-		<< "Special Seating Info: " << aGroup.specialSeatingInfo << endl
-		<< "Opt in for promos? " << aGroup.isOptInPromos 
-		<< endl;
+	char specialSeating;
+	char optIn;
 
+	if (aGroup.isSpecialSeating) {
+		specialSeating = 'Y'; 	
+	}
+	else {
+		specialSeating = 'N';
+	}
+
+	if (aGroup.isOptInPromos) {
+		optIn = 'Y';
+	}
+	else {
+		optIn = 'N';
+	}
+	
+	if (aGroup.position) {
+		out << left << setfill(' ') << setw(15) << aGroup.position
+			<< left << setw(20) << aGroup.groupName
+			<< setw(12) << left << aGroup.numPeople 
+		 	<< setw(15) << left << specialSeating
+		 	<< setw(30) << left << aGroup.specialSeatingInfo
+		 	<< setw(20) << left << optIn; 
+	}
 	return out;
 }
 
