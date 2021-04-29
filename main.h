@@ -22,5 +22,6 @@ char getCommand();
 void execute(char input, Queue & aQueue, int count);
 
 void addToWaitlist(Queue & aQueue, int pos);
+void seatGroup(Queue & aQueue);
 
 #endif

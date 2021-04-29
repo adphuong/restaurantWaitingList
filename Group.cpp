@@ -82,6 +82,12 @@ bool Group::getOptInPromos() const {
 	return isOptInPromos;
 }
 
+
+void Group::setPosition(int pos) {
+	position = pos;
+}
+
+
 // For testing purposes, need to edit printing layout
 ostream& operator<< (ostream& out, const Group& aGroup) {
 	char specialSeating;

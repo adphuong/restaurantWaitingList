@@ -26,6 +26,8 @@ class Group {
 		const char * getSpecialSeatingInfo() const;
 		bool getOptInPromos() const;
 
+		void setPosition(int pos);
+
 		friend ostream& operator<< (ostream & out, const Group & aGroup);
 
 	private:

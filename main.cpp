@@ -89,7 +89,7 @@ void execute(char input, Queue & aQueue, int count) {
 			break;
 		
 		case 'b':
-			aQueue.dequeue();
+			seatGroup(aQueue);
 			break;
 /*
 		case 'c':
@@ -204,3 +204,15 @@ void addToWaitlist(Queue & aQueue, int pos) {
 }
 
 
+void seatGroup(Queue & aQueue) {
+	bool isSeated = aQueue.dequeue();
+	
+	if (isSeated) {
+		cout << "The group has been seated!" << endl << endl;
+	}
+
+	else {
+		cout << "Oops, looks like the group has to wait a little longer!" 
+		 	 << endl;
+	}
+}
