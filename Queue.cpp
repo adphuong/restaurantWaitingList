@@ -123,6 +123,26 @@ void Queue::addToQueue(Group & aGroup) {
 }
 
 
+bool Queue::enqueue(const Group & aGroup) {
+	Node * rear = tail;
+	Node * newNode = new Node(aGroup);
+	bool isAdded = false;
+
+	if (!rear) {
+		head = tail = newNode;
+		isAdded = true;
+	}
+	else {
+		rear->next = newNode;
+		rear = newNode;
+		isAdded = true;
+	}
+
+	return isAdded;
+}
+
+
+
 ostream & operator<< (ostream & out, const Queue & aQueue) {
 	aQueue.printAll(out);
 
