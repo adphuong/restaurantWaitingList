@@ -7,6 +7,7 @@ int main() {
 	char command;
 	char filename[] = "queueData.txt";
 
+	welcome();
 	aQueue.loadData(filename);
 
 	count = aQueue.getSize();
@@ -49,7 +50,7 @@ void welcome() {
 void successLoad(int size) {
 	cout << endl
 		 << setfill('*') << setw(100) << "*" << endl
-		 << "There are currently " << size << " groups ahead of you." << endl
+		 << "There are currently " << size << " groups on the waiting list." << endl
 		 << setfill('*') << setw(100) << "*" 
 		 << endl << endl;
 }
@@ -118,11 +119,16 @@ void addToWaitlist(Queue & aQueue, int pos) {
 	bool optInPromos;
 	bool isAdded;
 
+	// Get group name
 	cout << "Enter your group name: " ;
 	cin.getline(groupName, MAX_CHAR);
 
+
+	// Get num of people and do some checking and clearing
 	cout << "Enter the number of people in your group: ";
 	cin >> num;
+	cin.clear();
+	cin.ignore(MAX_CHAR, '\n');
 
 	while (cin.fail() || num < 0) {
 		cin.clear();
@@ -132,11 +138,13 @@ void addToWaitlist(Queue & aQueue, int pos) {
 		cout << "Invalid input. Please enter number again: ";
 		cin >> num;
 	}
-	cin.clear();
-	cin.ignore(MAX_CHAR, '\n');
+	
 
+	// Get special seating and check input. Clear buffer
 	cout << "Will you need any special seating? (1 = Yes, 0 = No): ";
 	cin >> specialSeating;
+	cin.clear();
+	cin.ignore(MAX_CHAR, '\n');
 
 	while (cin.fail()) {
 		cin.clear();
@@ -146,10 +154,9 @@ void addToWaitlist(Queue & aQueue, int pos) {
 		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
 		cin >> specialSeating;
 	}
+	
 
-	cin.clear();
-	cin.ignore(MAX_CHAR, '\n');
-
+	// Set seatingInfo to 'None' if false, otherwise get input from user
 	if (!specialSeating) {
 		strcpy(seatingInfo, "None");
 
@@ -159,10 +166,10 @@ void addToWaitlist(Queue & aQueue, int pos) {
 		cin.getline(seatingInfo, MAX_CHAR);
 	}
 
+	// Get input for opt-in for promotions. Clear buffer and do checking
 	cout << "Would you like to opt-in for promotional information? "
 		 << "(1 = Yes, 0 = No): ";
 	cin >> optInPromos;
-
 	cin.clear();
 	cin.ignore(MAX_CHAR, '\n');
 
@@ -174,11 +181,13 @@ void addToWaitlist(Queue & aQueue, int pos) {
 		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
 		cin >> optInPromos ;
 	}
-	++pos;
+	++pos;				// Indicates position in line
 
+	// Create new Group object with new data from user
 	Group tempGroup(pos, groupName, num, specialSeating, 
 					seatingInfo, optInPromos);
 
+	// Add to back of queue
 	isAdded = aQueue.enqueue(tempGroup);
 
 	if (isAdded) {

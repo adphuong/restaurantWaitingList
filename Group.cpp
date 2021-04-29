@@ -102,7 +102,7 @@ ostream& operator<< (ostream& out, const Group& aGroup) {
 	}
 	
 	if (aGroup.position) {
-		out << left << setfill(' ') << setw(15) << aGroup.position
+		out << left << setfill(' ') << setw(8) << aGroup.position
 			<< left << setw(20) << aGroup.groupName
 			<< setw(12) << left << aGroup.numPeople 
 		 	<< setw(15) << left << specialSeating

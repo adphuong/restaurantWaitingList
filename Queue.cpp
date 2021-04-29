@@ -152,7 +152,7 @@ ostream & operator<< (ostream & out, const Queue & aQueue) {
 void Queue::printAll(ostream & out) const {
 	Node *curr = head;
 
-	cout << setfill(' ') << setw(15) << left << "# IN LINE"
+	cout << setfill(' ') << setw(8) << left << "#"
 		 << setw(20) << left << "GROUP NAME" 
 		 << setw(12) << left << "# PEOPLE" 
 		 << setw(15) << left << "SPECIAL SEAT"
