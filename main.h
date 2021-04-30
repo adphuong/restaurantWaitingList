@@ -23,5 +23,5 @@ void execute(char input, Queue & aQueue, int & pos);
 
 void addToWaitlist(Queue & aQueue, int & pos);
 void seatGroup(Queue & aQueue, int & pos);
-
+void checkNextGroup(Queue & aQueue);
 #endif

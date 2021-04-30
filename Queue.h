@@ -9,14 +9,14 @@ class Queue {
 	public:
 		Queue();
 		Queue(const Queue & aQueue);
-		
+		~Queue();
+
 		Queue& operator= (const Queue & aQueue);
 	 	
 		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
 		bool dequeue(int & pos);
-		bool peek(Queue & aQueue) const;
-		bool isEmpty(Queue & aQueue) const;
+		Group peek() const;
 		//void display(Queue & aQueue) const;
 
 		int getSize() const;

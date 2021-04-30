@@ -8,6 +8,29 @@ Queue::Queue(const Queue & aQueue) {
 	copy(aQueue.head, this->head);
 }
 
+
+Queue::~Queue() {
+	destroy(this->head);
+}
+
+
+void Queue::destroy(Node *& first) {
+	Node * curr = first;
+	Node * next = head->next;
+
+	if (next) {
+		curr->next = nullptr;
+	}
+	curr = next;
+
+	while (curr) {
+		next = curr->next;
+		delete curr;
+
+		curr = next;
+	}
+}
+
 void Queue::copy(Node * fromHead, Node *& toHead) {
 	Node * currFrom;
 	Node * currTo;
@@ -199,6 +222,15 @@ bool Queue::dequeue(int & pos) {
 		result = true;
 	}
 	return result;
+}
+
+
+Group Queue::peek() const {
+	if (head == nullptr) {
+		cout << "peek() called with empty queue." << endl;
+	}
+
+	return *(head->data);
 }
 
 

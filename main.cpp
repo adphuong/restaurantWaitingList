@@ -59,8 +59,8 @@ void successLoad(int size) {
 void displayMenu() {
 	cout << setfill('-') << setw(100) << "-" << endl
 		 << "What would you like to do?" << endl
-		 << "[A] Add group to the waitlist" << endl
-		 << "[B] Seat a group from the waitlist" << endl
+		 << "[A] Add a group to the waitlist" << endl
+		 << "[B] Seat a group" << endl
 		 << "[C] Check who is next in line to be seated" << endl
 		 << "[D] Display the waitlist" << endl
 		 << "[Q] Quit program" << endl
@@ -91,11 +91,9 @@ void execute(char input, Queue & aQueue, int & pos) {
 		case 'b':
 			seatGroup(aQueue, pos);
 			break;
-/*
 		case 'c':
 			checkNextGroup(aQueue);
 			break;
-		*/
 		case 'd':
 			cout << aQueue << endl;
 			break;
@@ -166,7 +164,7 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 		cout << "Enter special seating (Highchair, Wheelchair, or None): " ;
 		cin.getline(seatingInfo, MAX_CHAR);
 	}
-
+	
 	// Get input for opt-in for promotions. Clear buffer and do checking
 	cout << "Would you like to opt-in for promotional information? "
 		 << "(1 = Yes, 0 = No): ";
@@ -182,6 +180,7 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
 		cin >> optInPromos ;
 	}
+	
 	++pos;				// Indicates position in line
 
 	// Create new Group object with new data from user
@@ -208,11 +207,33 @@ void seatGroup(Queue & aQueue, int & pos) {
 	bool isSeated = aQueue.dequeue(pos);
 	
 	if (isSeated) {
-		cout << "The group has been seated!" << endl << endl;
+		cout << "GROUP HAS BEEN SEATED!" << endl << endl;
 	}
 
 	else {
 		cout << "Oops, looks like the group has to wait a little longer!" 
 		 	 << endl;
 	}
+}
+
+
+void checkNextGroup(Queue & aQueue) {
+	Group nextGroup = aQueue.peek();
+
+	cout << "THE NEXT GROUP TO BE SEATED IS: " << endl << endl;
+	
+	cout << setfill(' ') << setw(8) << left << "#"
+		 << setw(20) << left << "GROUP NAME" 
+		 << setw(12) << left << "# PEOPLE" 
+		 << setw(15) << left << "SPECIAL SEAT"
+		 << setw(30) << left << "INFO"
+		 << setw(20) << left << "OPT-IN PROMOS" << endl;
+
+	cout << setfill('-') << setw(100) << "-" << endl
+		 << nextGroup << endl
+		 << setfill('-') << setw(100) << "-" << endl;
+
+	cout << endl;
+
+	
 }
