@@ -4,11 +4,14 @@ int MAX = 101;
 int main() {
 	Queue aQueue;
 	int pos;
+	int promoContacts;
 	char command;
 	char filename[] = "queueData.txt";
 
 	welcome();
-	aQueue.loadData(filename);
+	aQueue.loadData(filename, promoContacts);
+
+	Stack contactPersons(promoContacts);
 
 	pos = aQueue.getSize();
 	successLoad(pos);
@@ -87,7 +90,6 @@ void execute(char input, Queue & aQueue, int & pos) {
 		case 'a':
 			addToWaitlist(aQueue, pos);
 			break;
-		
 		case 'b':
 			seatGroup(aQueue, pos);
 			break;
@@ -97,7 +99,6 @@ void execute(char input, Queue & aQueue, int & pos) {
 		case 'd':
 			cout << aQueue << endl;
 			break;
-		
 		case 'q':
 			exit(1);
 			break;
@@ -204,9 +205,30 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 
 
 void seatGroup(Queue & aQueue, int & pos) {
+	Group groupToSeat = aQueue.peek();
+	char fullName[MAX_CHAR];
+	char email[MAX_CHAR];
+
+	if (groupToSeat.getOptInPromos()) {
+		cout << "Looks like you opted in for our promo mailing list!" 
+			 << endl << endl
+			 << "Please enter the following info:" << endl;
+		
+		cout << "Full Name: ";
+		cin.getline(fullName, MAX_CHAR);
+
+		cout << "Email Address: ";
+		cin.getline(email, MAX_CHAR);
+
+		ContactInfo tempContact(fullName, email);
+
+		pushOnStack(tempContact);
+	}
+
 	bool isSeated = aQueue.dequeue(pos);
 	
 	if (isSeated) {
+		cout << endl;
 		cout << "GROUP HAS BEEN SEATED!" << endl << endl;
 	}
 
@@ -214,6 +236,11 @@ void seatGroup(Queue & aQueue, int & pos) {
 		cout << "Oops, looks like the group has to wait a little longer!" 
 		 	 << endl;
 	}
+}
+
+
+void pushOnStack(ContactInfo & aContact) {
+	
 }
 
 

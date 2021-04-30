@@ -13,11 +13,10 @@ class Queue {
 
 		Queue& operator= (const Queue & aQueue);
 	 	
-		void loadData(const char * filename);	
+		void loadData(const char * filename, int & promoContacts);	
 		bool enqueue(const Group & aGroup);
 		bool dequeue(int & pos);
 		Group peek() const;
-		//void display(Queue & aQueue) const;
 
 		int getSize() const;
 

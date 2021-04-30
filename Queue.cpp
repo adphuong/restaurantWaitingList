@@ -57,7 +57,7 @@ int Queue::getSize() const {
 	return size;
 }
 
-void Queue::loadData(const char * filename) {
+void Queue::loadData(const char * filename, int & promoContacts) {
 	int position;
 	char groupName[MAX_CHAR];
 	int num;
@@ -88,6 +88,10 @@ void Queue::loadData(const char * filename) {
 
 		inFile >> isOptedIn;
 		inFile.ignore();
+
+		if (isOptedIn) {
+			++promoContacts;
+		}
 
 		Group tempGroup(position, groupName, num, isSpecial, specialInfo, isOptedIn);
 		addToQueue(tempGroup);

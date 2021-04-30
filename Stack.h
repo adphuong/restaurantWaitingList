@@ -2,10 +2,10 @@
 #define STACK_H
 #include "ContactInfo.h"
 
-const int CAPACITY = 101;
 class Stack {
 	public:
 		Stack();
+		Stack(int initSize);
 		Stack(const Stack & aStack);
 		
 		Stack& operator= (const Stack & aStack);
@@ -21,7 +21,7 @@ class Stack {
 		const char * getEmail() const;
 
 	private:
-		ContactInfo * persons[CAPACITY];	
+		ContactInfo * persons;	
 		int size;
 
 };
