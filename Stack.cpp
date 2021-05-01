@@ -41,7 +41,7 @@ bool Stack::pop() {
 
 	stackOfContacts[size - 1]->setFullName(nullptr);
 	stackOfContacts[size - 1]->setEmail(nullptr);
-
+	
 	return true;
 }
 
@@ -49,15 +49,16 @@ bool Stack::pop() {
 void Stack::saveToFile(ContactInfo & aContact) {
 	ofstream out;
 	char filename[] = "StackContacts.txt";
-	out.open(filename);
+	
+	out.open(filename, fstream::app);
 
 	if (!out) {
 		cerr << "Failed to open " << filename << " for writing!" << endl;
 		exit(1);
-	}	
+	}
 
 	out << aContact.getFullName() << ","
-		<< aContact.getEmail() << "," << endl;
-
+		<< aContact.getEmail() << endl;
+	
 	out.close();
 }
