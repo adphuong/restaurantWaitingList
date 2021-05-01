@@ -24,7 +24,7 @@ class Group {
 		int getNumPeople() const;
 		bool getSpecialSeating() const;
 		const char * getSpecialSeatingInfo() const;
-		bool getOptInPromos() const;
+		bool getOptedIn() const;
 
 		void setPosition(int pos);
 

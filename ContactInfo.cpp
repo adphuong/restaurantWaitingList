@@ -58,6 +58,16 @@ const char * ContactInfo::getEmail() const {
 }
 
 
+void ContactInfo::setFullName(char * name) {
+	this->fullName = name;
+}
+
+
+void ContactInfo::setEmail(char * email) {
+	this->email = email;
+}
+
+
 ostream& operator<< (ostream& out, const ContactInfo & aPerson) {
 	out << "Full name: " << aPerson.fullName << endl
 		<< "Email: " <<  aPerson.email << endl

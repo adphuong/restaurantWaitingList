@@ -78,7 +78,7 @@ const char * Group::getSpecialSeatingInfo() const {
 	return specialSeatingInfo;
 }
 
-bool Group::getOptInPromos() const {
+bool Group::getOptedIn() const {
 	return isOptInPromos;
 }
 

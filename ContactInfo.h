@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <cctype>
 
+
 using namespace std;
 
 class ContactInfo {
@@ -20,6 +21,9 @@ class ContactInfo {
 
 		const char * getFullName() const;
 		const char * getEmail() const;
+
+		void setFullName(char * name);
+		void setEmail(char * email);
 
 		friend ostream& operator<< (ostream & out, const ContactInfo & aPerson);
 

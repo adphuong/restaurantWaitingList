@@ -11,7 +11,7 @@ int main() {
 	welcome();
 	aQueue.loadData(filename, promoContacts);
 
-	Stack contactPersons(promoContacts);
+	Stack aStack(promoContacts);
 
 	pos = aQueue.getSize();
 	successLoad(pos);
@@ -22,7 +22,7 @@ int main() {
 	command = getCommand();
 
 	while (command != 'q') {
-		execute(command, aQueue, pos);
+		execute(command, aQueue, pos, aStack);
 		displayMenu();
 		command = getCommand();
 	}
@@ -66,6 +66,7 @@ void displayMenu() {
 		 << "[B] Seat a group" << endl
 		 << "[C] Check who is next in line to be seated" << endl
 		 << "[D] Display the waitlist" << endl
+		 << "[E] Send promotion to recent group" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
 
@@ -85,19 +86,22 @@ char getCommand() {
 }
 
 
-void execute(char input, Queue & aQueue, int & pos) {
+void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 	switch (input) {
 		case 'a':
 			addToWaitlist(aQueue, pos);
 			break;
 		case 'b':
-			seatGroup(aQueue, pos);
+			seatGroup(aQueue, pos, aStack);
 			break;
 		case 'c':
 			checkNextGroup(aQueue);
 			break;
 		case 'd':
 			cout << aQueue << endl;
+			break;
+		case 'e':
+			aStack.pop();
 			break;
 		case 'q':
 			exit(1);
@@ -204,15 +208,15 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 }
 
 
-void seatGroup(Queue & aQueue, int & pos) {
+void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 	Group groupToSeat = aQueue.peek();
 	char fullName[MAX_CHAR];
 	char email[MAX_CHAR];
 
-	if (groupToSeat.getOptInPromos()) {
+	if (groupToSeat.getOptedIn()) {
 		cout << "Looks like you opted in for our promo mailing list!" 
 			 << endl << endl
-			 << "Please enter the following info:" << endl;
+			 << "Please enter your contact info:" << endl;
 		
 		cout << "Full Name: ";
 		cin.getline(fullName, MAX_CHAR);
@@ -222,7 +226,7 @@ void seatGroup(Queue & aQueue, int & pos) {
 
 		ContactInfo tempContact(fullName, email);
 
-		pushOnStack(tempContact);
+		aStack.push(tempContact);	
 	}
 
 	bool isSeated = aQueue.dequeue(pos);
@@ -236,11 +240,6 @@ void seatGroup(Queue & aQueue, int & pos) {
 		cout << "Oops, looks like the group has to wait a little longer!" 
 		 	 << endl;
 	}
-}
-
-
-void pushOnStack(ContactInfo & aContact) {
-	
 }
 
 

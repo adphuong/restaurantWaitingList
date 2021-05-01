@@ -11,19 +11,21 @@ class Stack {
 		Stack& operator= (const Stack & aStack);
 	 	
 		bool push(const ContactInfo & aPerson);
-		bool pop(ContactInfo & aPerson);
-		bool peek(ContactInfo & aPerson) const;
+		bool pop();
+		bool peek() const;
 		bool isEmpty() const;
 		void display() const;
 
 		int getSize() const;
-		const char * getFullName() const;
-		const char * getEmail() const;
 
 	private:
-		ContactInfo * persons;	
+		ContactInfo ** stackOfContacts;	
 		int size;
-
+		
+		void destroy();
+		void grow();
+		void copy(Stack & dest, const Stack & src);
+		void saveToFile(ContactInfo & aContact) ;
 };
 
 #endif
