@@ -57,13 +57,14 @@ int Queue::getSize() const {
 	return size;
 }
 
-void Queue::loadData(const char * filename, int & promoContacts) {
+int Queue::loadData(const char * filename) {
 	int position;
 	char groupName[MAX_CHAR];
 	int num;
 	bool isSpecial;
 	char specialInfo[MAX_CHAR];
 	bool isOptedIn;
+	int numPromos = 0;
 
 	ifstream inFile;
 	inFile.open(filename);
@@ -90,7 +91,7 @@ void Queue::loadData(const char * filename, int & promoContacts) {
 		inFile.ignore();
 
 		if (isOptedIn) {
-			++promoContacts;
+			++numPromos;
 		}
 
 		Group tempGroup(position, groupName, num, isSpecial, specialInfo, isOptedIn);
@@ -98,6 +99,8 @@ void Queue::loadData(const char * filename, int & promoContacts) {
 	}
 
 	inFile.close();
+
+	return numPromos;
 }
 
 
@@ -263,12 +266,6 @@ void Queue::printAll(ostream & out) const {
 		if (curr == head)
 			break;
 	}
-
-	/*
-	for (curr = head; curr->next != headRef; curr = curr->next) {
-		out << *(curr->data) << endl;
-	}
-	*/
 
 	cout << setfill('-') << setw(100) << "-" << endl;
 

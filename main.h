@@ -25,5 +25,5 @@ void addToWaitlist(Queue & aQueue, int & pos);
 void seatGroup(Queue & aQueue, int & pos, Stack & aStack);
 void checkNextGroup(Queue & aQueue);
 void sendPromo(Stack & aStack);
-
+void peekStack(Stack & aStack);
 #endif

@@ -4,14 +4,14 @@ int MAX = 101;
 int main() {
 	Queue aQueue;
 	int count;
-	int numPromoContacts;
+	int numPromoContacts = 0;
 	char command;
 	char filename[] = "queueData.txt";
 
 	welcome();
-	aQueue.loadData(filename, numPromoContacts);
+	numPromoContacts = aQueue.loadData(filename);
 
-	Stack aStack(numPromoContacts);
+	Stack aStack(0);
 
 	count = aQueue.getSize();
 	successLoad(count);
@@ -67,6 +67,7 @@ void displayMenu() {
 		 << "[C] Check who is next in line to be seated" << endl
 		 << "[D] Display the waitlist" << endl
 		 << "[E] Send promotion to recent group" << endl
+		 << "[F] Peek at top of Promo Contact stack" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
 
@@ -102,6 +103,9 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 			break;
 		case 'e':
 			sendPromo(aStack);
+			break;
+		case 'f':
+			peekStack(aStack);	
 			break;
 		case 'q':
 			exit(1);
@@ -214,9 +218,9 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 	char email[MAX_CHAR];
 
 	if (groupToSeat.getOptedIn()) {
-		cout << "Looks like you opted in for our promo mailing list!" 
+		cout << "Our records indicate that you opted in for our promo mailing list!" 
 			 << endl << endl
-			 << "Please enter your contact info:" << endl;
+			 << "Please enter your contact info below:" << endl;
 		
 		cout << "Full Name: ";
 		cin.getline(fullName, MAX_CHAR);
@@ -272,7 +276,16 @@ void sendPromo(Stack & aStack) {
 	if (!promoSent) {
 		cout << "Looks like there are no contacts in this list "
 			 << "to send promotions to right now."
-			 << endl;
+			 << endl << endl;
 	}
 }
 
+
+void peekStack(Stack & aStack) {
+	ContactInfo recentPerson;
+
+	recentPerson = aStack.peek();
+
+	cout << "Contact at top of stack: " << endl
+		 << recentPerson << endl;
+}

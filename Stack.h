@@ -9,16 +9,17 @@ class Stack {
 		Stack();
 		Stack(int initSize);
 		Stack(const Stack & aStack);
-		
+		~Stack();
+
 		Stack& operator= (const Stack & aStack);
 	 	
 		bool push(const ContactInfo & aPerson);
 		bool pop();
-		bool peek() const;
-		bool isEmpty() const;
-		void display() const;
-
+		ContactInfo peek() const;
+		
 		int getSize() const;
+
+		friend ostream& operator<< (ostream & out, const Stack & aStack);
 
 	private:
 		ContactInfo ** stackOfContacts;	
@@ -27,6 +28,8 @@ class Stack {
 		void destroy();
 		void grow();
 		void copy(Stack & dest, const Stack & src);
+		void display(ostream & out) const;
+
 		void saveToFile(ContactInfo & aContact) ;
 };
 

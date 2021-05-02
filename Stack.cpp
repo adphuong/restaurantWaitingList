@@ -9,9 +9,20 @@ Stack::Stack(int initSize) {
 
 	stackOfContacts = new ContactInfo * [size];
 
+}
+
+
+Stack::~Stack() {
+	destroy();
+}
+
+
+void Stack::destroy() {
 	for (int i = 0; i < size; i++) {
-		stackOfContacts[i] = nullptr;
+		delete stackOfContacts[size];
 	}
+
+	delete [] stackOfContacts;
 }
 
 
@@ -32,9 +43,15 @@ bool Stack::pop() {
 	char tempName[TMP_CAP];
 	char tempEmail[TMP_CAP];
 
+	if (size == 0) {
+		return false;
+	}
+	/*
 	if (!stackOfContacts) {
 		return false;	
+	
 	}
+	*/
 
 	// Gets last data info from array and stores in temp variables
 	strcpy(tempName, stackOfContacts[size - 1]->getFullName());
@@ -44,7 +61,7 @@ bool Stack::pop() {
 	ContactInfo tempContact(tempName, tempEmail);
 	saveToFile(tempContact);
 
-	cout << "Successfully sent promo materials to " 
+	cout << "Successfully sent promo materials to: " 
 		 << endl << endl
 		 << tempContact << endl;
 
@@ -57,13 +74,56 @@ bool Stack::pop() {
 }
 
 
+ContactInfo Stack::peek() const {
+	char tempName[TMP_CAP];
+	char tempEmail[TMP_CAP];
+	
+	if (size == 0) {
+		cout << "Stack is empty. Program terminating." << endl << endl;
+		exit(1);
+	}
+
+	// Gets last data info from array and stores in temp variables
+	strcpy(tempName, stackOfContacts[size - 1]->getFullName());
+	strcpy(tempEmail, stackOfContacts[size - 1]->getEmail());
+
+	// Create new ContactInfo object with temp variables and save it to file
+	ContactInfo tempContact(tempName, tempEmail);
+
+	return tempContact;
+}
+
+
+/*
+void Stack::display(ostream & out) const {
+	cout << setfill(' ') <<setw(20) << left << "FULL NAME"
+		<< setw(12) << left << "EMAIL ADDRESS"
+		<< endl;
+	
+	for (int i = 0; i < size; i++) {
+		out << stackOfContacts[i]->getFullName()
+			<< stackOfContacts[i]->getEmail()
+			<< endl;
+	}
+}
+
+
+
+ostream& operator<< (ostream & out, const Stack & aStack) {
+	aStack.display(out);
+
+	return out;
+}
+*/
+
+
 void Stack::saveToFile(ContactInfo & aContact) {
 	ofstream out;
 	char filename[] = "StackContacts.txt";
 	
 	out.open(filename, fstream::app);
 
-	if (!out) {
+		if (!out) {
 		cerr << "Failed to open " << filename << " for writing!" << endl;
 		exit(1);
 	}
@@ -73,3 +133,6 @@ void Stack::saveToFile(ContactInfo & aContact) {
 	
 	out.close();
 }
+
+
+
