@@ -8,6 +8,10 @@ Stack::Stack(int initSize) {
 	size = initSize;
 
 	stackOfContacts = new ContactInfo * [size];
+
+	for (int i = 0; i < size; i++) {
+		stackOfContacts[i] = nullptr;
+	}
 }
 
 
@@ -25,23 +29,30 @@ bool Stack::push(const ContactInfo & aPerson) {
 }
 
 bool Stack::pop() {
-	char tempName[20];
-	char tempEmail[20];
+	char tempName[TMP_CAP];
+	char tempEmail[TMP_CAP];
 
 	if (!stackOfContacts) {
-		cout << "Looks like there are no contacts in this list right now"
-			 << endl;
+		return false;	
 	}
 
+	// Gets last data info from array and stores in temp variables
 	strcpy(tempName, stackOfContacts[size - 1]->getFullName());
 	strcpy(tempEmail, stackOfContacts[size - 1]->getEmail());
 
+	// Create new ContactInfo object with temp variables and save it to file
 	ContactInfo tempContact(tempName, tempEmail);
 	saveToFile(tempContact);
 
+	cout << "Successfully sent promo materials to " 
+		 << endl << endl
+		 << tempContact << endl;
+
+	// Reset array index we just popped off and dec. size
 	stackOfContacts[size - 1]->setFullName(nullptr);
 	stackOfContacts[size - 1]->setEmail(nullptr);
-	
+	size--; 
+
 	return true;
 }
 

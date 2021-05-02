@@ -2,6 +2,8 @@
 #define STACK_H
 #include "ContactInfo.h"
 
+const int TMP_CAP = 100;
+
 class Stack {
 	public:
 		Stack();

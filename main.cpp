@@ -3,18 +3,18 @@
 int MAX = 101;
 int main() {
 	Queue aQueue;
-	int pos;
-	int promoContacts;
+	int count;
+	int numPromoContacts;
 	char command;
 	char filename[] = "queueData.txt";
 
 	welcome();
-	aQueue.loadData(filename, promoContacts);
+	aQueue.loadData(filename, numPromoContacts);
 
-	Stack aStack(promoContacts);
+	Stack aStack(numPromoContacts);
 
-	pos = aQueue.getSize();
-	successLoad(pos);
+	count = aQueue.getSize();
+	successLoad(count);
 
 	cout << aQueue << endl;
 
@@ -22,7 +22,7 @@ int main() {
 	command = getCommand();
 
 	while (command != 'q') {
-		execute(command, aQueue, pos, aStack);
+		execute(command, aQueue, count, aStack);
 		displayMenu();
 		command = getCommand();
 	}
@@ -101,7 +101,7 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 			cout << aQueue << endl;
 			break;
 		case 'e':
-			aStack.pop();
+			sendPromo(aStack);
 			break;
 		case 'q':
 			exit(1);
@@ -263,3 +263,16 @@ void checkNextGroup(Queue & aQueue) {
 
 	
 }
+
+void sendPromo(Stack & aStack) {
+	bool promoSent = false;
+
+	promoSent = aStack.pop();
+
+	if (!promoSent) {
+		cout << "Looks like there are no contacts in this list "
+			 << "to send promotions to right now."
+			 << endl;
+	}
+}
+
