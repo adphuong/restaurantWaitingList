@@ -190,34 +190,30 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 	// Get num of people and do some checking and clearing
 	cout << "Enter the number of people in your group: ";
 	cin >> num;
-	cin.clear();
-	cin.ignore(MAX_CHAR, '\n');
 
-	while (cin.fail() || num < 0) {
+	while (cin.fail() || num <= 0) {
 		cin.clear();
 		cin.ignore(MAX_CHAR, '\n');
-
 		cout << endl;
 		cout << "Invalid input. Please enter number again: ";
 		cin >> num;
 	}
 	
-
 	// Get special seating and check input. Clear buffer
 	cout << "Will you need any special seating? (1 = Yes, 0 = No): ";
 	cin >> specialSeating;
-	cin.clear();
-	cin.ignore(MAX_CHAR, '\n');
+	
 
 	while (cin.fail()) {
 		cin.clear();
 		cin.ignore(MAX_CHAR, '\n');
-
 		cout << endl;
 		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
 		cin >> specialSeating;
 	}
-	
+
+	cin.clear();
+	cin.ignore(MAX_CHAR, '\n');
 
 	// Set seatingInfo to 'None' if false, otherwise get input from user
 	if (!specialSeating) {
@@ -237,12 +233,13 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 	cin.ignore(MAX_CHAR, '\n');
 
 	while (cin.fail()) {
+		cout << endl;
+		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
+		cin >> optInPromos;
+
 		cin.clear();
 		cin.ignore(MAX_CHAR, '\n');
 
-		cout << endl;
-		cout << "Invalid input. Please enter again (1 = Yes, 0 = No): ";
-		cin >> optInPromos ;
 	}
 	
 	++pos;				// Indicates position in line
