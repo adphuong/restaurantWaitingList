@@ -1,3 +1,11 @@
+/********************************************************************
+ *	File:			Queue.h
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This is the header file for Queue ADT
+ *******************************************************************/
+
 #ifndef QUEUE_H
 #define QUEUE_H
 

@@ -1,3 +1,11 @@
+/********************************************************************
+ *	File:			Stack.h
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This is the header file for Stack ADT
+ *******************************************************************/
+
 #ifndef STACK_H
 #define STACK_H
 #include "ContactInfo.h"
@@ -26,7 +34,6 @@ class Stack {
 		int size;
 		
 		void destroy();
-		void grow();
 		void copy(Stack & dest, const Stack & src);
 		void display(ostream & out) const;
 

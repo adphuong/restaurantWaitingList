@@ -1,3 +1,11 @@
+/********************************************************************
+ *	File:			main.h
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This is the header file for main
+ *******************************************************************/
+
 #pragma once
 #ifndef MAIN_H
 #define MAIN_H
@@ -26,4 +34,5 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack);
 void checkNextGroup(Queue & aQueue);
 void sendPromo(Stack & aStack);
 void peekStack(Stack & aStack);
+
 #endif

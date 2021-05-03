@@ -1,7 +1,38 @@
+/********************************************************************
+ *	File:			Queue.cpp
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This includes all the implementations for the 
+ *					Queue ADT:
+ *					- Default constructor & Copy Constructor
+ *					- Destructor
+ *					- Getter: getSize() & loadData()
+ *					- Overloaded (=) and (<<) operators
+ *					- Queue operations: 
+ *						- enqueue(), dequeue(), peek()
+ *					- Private member functions:
+ *						- addToQueue(), printAll(), copy(), destroy()
+ *******************************************************************/
+
 #include "Queue.h"
 
+/*************************** Queue() *******************************
+ *	Default constructor
+ *
+ *	@params - none
+ *	@returns - none
+ *******************************************************************/
 Queue::Queue() : front(nullptr), back(nullptr), size(0) {}
 
+
+/*************************** Queue() *******************************
+ *	Copy constructor that takes in address of a Queue object and 
+ *	copies data from it. 
+ *
+ *	@params - address of Queue we want copy from
+ *	@returns - Queue object with copied data
+ *******************************************************************/
 Queue::Queue(const Queue & aQueue) {
 	this->size = aQueue.size;
 
@@ -9,11 +40,23 @@ Queue::Queue(const Queue & aQueue) {
 }
 
 
+/*************************** ~Queue() *******************************
+ *	Destructor to return memory
+ *
+ *	@params - pointer of node we want to destroy
+ *	@returns - none
+ *******************************************************************/
 Queue::~Queue() {
 	destroy(this->front);
 }
 
 
+/*************************** destroy() *****************************
+ *	Helper function for destructor to release memory
+ *
+ *	@params - pointer of node we want to destroy
+ *	@returns - none
+ *******************************************************************/
 void Queue::destroy(Node *& first) {
 	Node * curr = first;
 	Node * next = front->next;
@@ -31,23 +74,37 @@ void Queue::destroy(Node *& first) {
 	}
 }
 
-void Queue::copy(Node * fromfront, Node *& tofront) {
+
+/*************************** copy() *********************************
+ *	Copies data from one node to another using pass by reference
+ *	
+ *	@params - pointer of node we want to copy from and address of 
+ *			  pointer we want to copy to
+ *	@returns - none
+ *******************************************************************/
+void Queue::copy(Node * fromFront, Node *& toFront) {
 	Node * currFrom;
 	Node * currTo;
 
-	if (!fromfront) {
-		tofront = nullptr;
+	// Empty list we are copying from
+	if (!fromFront) {
+		toFront = nullptr;
 		return;
 	}
 
-	tofront = new Node(*(fromfront->data));
+	// Copy first piece of data in fromFront
+	toFront = new Node(*(fromFront->data));
 
-	currFrom = fromfront->next;
-	currTo = tofront;
+	// First node already copied
+	currFrom = fromFront->next;
+	currTo = toFront;
 
+	// While there is something to copy
 	while (currFrom) {
+		// Create new node
 		currTo->next = new Node(*(currFrom->data));
 
+		// update for traversing
 		currFrom = currFrom->next;
 		currTo = currTo->next;
 	}
@@ -56,6 +113,14 @@ void Queue::copy(Node * fromfront, Node *& tofront) {
 int Queue::getSize() const {
 	return size;
 }
+
+
+/*************************** loadData() *****************************
+ *	Loads the list of groups into our queue
+ *	
+ *	@params - pointer to char filename that we want to load
+ *	@returns - none
+ *******************************************************************/
 
 void Queue::loadData(const char * filename) {
 	int position;
@@ -74,6 +139,7 @@ void Queue::loadData(const char * filename) {
 		exit(1);
 	}
 
+	// Read data from file
 	while (inFile.getline(groupName, MAX_CHAR, ',')) {
 		inFile >> position; 
 		inFile.get();
@@ -95,6 +161,7 @@ void Queue::loadData(const char * filename) {
 		}
 		*/
 
+		// Create group object so that we can add to queue
 		Group tempGroup(position, groupName, num, isSpecial, specialInfo, isOptedIn);
 		addToQueue(tempGroup);
 	}
@@ -103,6 +170,13 @@ void Queue::loadData(const char * filename) {
 }
 
 
+/*************************** addToQueue() ***************************
+ *	Adds group to the Queue by position number. All new groups that
+ *	entered by the user will be added to the back.
+ *	
+ *	@params - Address of group we want to add
+ *	@returns - none
+ *******************************************************************/
 void Queue::addToQueue(Group & aGroup) {
 	Node * temp = nullptr;
 	Node * frontRef = front;
@@ -110,16 +184,20 @@ void Queue::addToQueue(Group & aGroup) {
 	Node * curr;
 	Node * nodeToAdd = new Node(aGroup);
 
+	// List is empty, so add group to the front
 	if (front == nullptr) {
 		front = nodeToAdd;
 		back = nodeToAdd;
 
+		// Update pointers for circular linked list
 		front->next = front;
 		back->next = front;
 
 		++size;
 	}
+	// There is at least one group in the list
 	else {
+		// Add group to the front 
 		if (nodeToAdd->data->getPosition() < front->data->getPosition()) {
 			temp = front;
 			front = nodeToAdd;
@@ -129,17 +207,19 @@ void Queue::addToQueue(Group & aGroup) {
 
 			++size;
 		}
+		// Add group to the back
 		else if (nodeToAdd->data->getPosition() > back->data->getPosition()) {
 			back->next = nodeToAdd;
 			back = nodeToAdd;
 
 			++size;
 		}
+		// There are at least 2 groups already in list if we reach here,
+		// so we will be adding it somewhere in the list
 		else {
 			prev = front;
 			curr = front->next;
 			
-			// while (Curr != nullptr)
 			while (curr != frontRef) {
 				if (nodeToAdd->data->getPosition() < curr->data->getPosition())
 				{
@@ -159,6 +239,12 @@ void Queue::addToQueue(Group & aGroup) {
 }
 
 
+/*************************** enqueue() *****************************
+ *	Add new group/node to the Queue
+ *	
+ *	@params - Address of group we want to add
+ *	@returns - true if added successfully, false otherwise
+ *******************************************************************/
 bool Queue::enqueue(const Group & aGroup) {
 	Node * newNode = new Node(aGroup);
 
@@ -166,6 +252,13 @@ bool Queue::enqueue(const Group & aGroup) {
 }
 
 
+/********************* Recursive enqueue() **************************
+ *	Recursive function to add a group to the queue
+ *	
+ *	@params - pointer to node we want to add
+ *			- pointer to current head
+ *	@returns - true if added successfully, false otherwise
+ *******************************************************************/
 bool Queue::enqueue(Node * newNode, Node * front) {
 	if (!front) {
 		front = back = newNode;
@@ -187,6 +280,12 @@ bool Queue::enqueue(Node * newNode, Node * front) {
 }
 
 
+/*************************** dequeue() *****************************
+ *	Remove group from front of the queue
+ *	
+ *	@params - address of an int (pos) to update position nums
+ *	@returns - true if removed successfully, false otherwise
+ *******************************************************************/
 bool Queue::dequeue(int & pos) {
 	bool result = false;
 	int newPos;
@@ -236,6 +335,12 @@ bool Queue::dequeue(int & pos) {
 }
 
 
+/****************************** peek() ******************************
+ *	Get group that is in front of the queue
+ *	
+ *	@params - none
+ *	@returns - Group object that is at the front of queue
+ *******************************************************************/
 Group Queue::peek() const {
 	if (front == nullptr) {
 		cout << "peek() called with empty queue." << endl;
@@ -245,6 +350,12 @@ Group Queue::peek() const {
 }
 
 
+/*********************** Overloaded << operator *********************
+ *	Overloading << operator so client can print Queue object.
+ *	
+ *	@params - address of ostream and queue we want to print
+ *	@returns - ostream we want to print
+ *******************************************************************/
 ostream & operator<< (ostream & out, const Queue & aQueue) {
 	aQueue.printAll(out);
 

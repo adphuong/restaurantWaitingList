@@ -1,3 +1,21 @@
+/********************************************************************
+ *	File:			Group.cpp
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This includes all the implementations for the 
+ *					Group ADT:
+ *					- Default constructor & Copy Constructor
+ *					- Constructor that takes params
+ *					- Destructor
+ *					- Getters: getPosition(), getNumPeople(), getOptedIn()
+ *						getSpecialSeating(), getSpecialSeatingInfo()
+ *					- Setter: setPosition()
+ *					- Overloaded (=) and (<<) operators
+ *					- Private member functions:
+ *						- init()
+ *******************************************************************/
+
 #ifndef GROUP_H
 #define GROUP_H
 

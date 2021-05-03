@@ -1,3 +1,26 @@
+/********************************************************************
+ *	File:			main.cpp
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This program keeps track of a restaurant's 
+ *					waiting list. It utilizes a circular linked list
+ *					to build, traverse, add, and remove from the 
+ *					Queue of groups and also a dynamic array to keep
+ *					track of a Stack of people who opt in to be on the 
+ *					contact list for promotional material.
+ *					Queue, Group, Stack, and ContactInfo are the ADTs
+ *					utilized in this menu-driven program.
+ *					The user will be able to perform the following:
+ *						- Add new group to queue
+ *						- Check next group in queue to be seated
+ *		 				- Seat a group
+ *		 				- Display the waitlist
+ *		 				- Peek at top of Promo Opt-in stack
+ *						- Send promotion to recent group
+ *						- Display contacts in Promo opt-in list
+ *******************************************************************/
+
 #include "main.h"
 
 int MAX = 101;
@@ -10,15 +33,15 @@ int main() {
 	welcome();
 	aQueue.loadData(filename);
 
-
 	// Initializing stack size to 0 since we are dynamically allocating
 	Stack aStack(0);
 
+	// Get size of queue and print
 	count = aQueue.getSize();
 	successLoad(count);
 
+	// Print queue list and menu, then get command from user
 	cout << aQueue << endl;
-
 	displayMenu();
 	command = getCommand();
 
@@ -27,18 +50,6 @@ int main() {
 		displayMenu();
 		command = getCommand();
 	}
-
-	/* For stack, to figure out how big our array is for Stack, we want to
-	 * check for isOptInPromos is true, if it is, we want to increment our counter.
-	 * Then we use this counter to pass into a Stack constructor so it
-	 * allocates enough memory for the array size.
-	 * When a group is seated, prompt for full and email, create a ContactInfo
-	 * object with those two data. Then push this onto the stack with push()
-	 *
-	 * When enqueue, we want to check if new data for isOptIn = true. If it is,
-	 * we increment count and pass in to Stack constructor
-	 */
-
 
 	return 0;
 }
