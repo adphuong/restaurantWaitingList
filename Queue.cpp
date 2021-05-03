@@ -215,6 +215,8 @@ void Queue::addToQueue(Group & aGroup) {
 			back->next = nodeToAdd;
 			back = nodeToAdd;
 
+			back->next = front;
+
 			++size;
 		}
 		// There are at least 2 groups already in list if we reach here,
@@ -228,6 +230,10 @@ void Queue::addToQueue(Group & aGroup) {
 				{
 					prev->next = nodeToAdd;
 					nodeToAdd->next = curr;
+					
+					if (nodeToAdd->next == back) {
+						back->next = front;
+					}
 
 					break;
 				}
@@ -236,6 +242,7 @@ void Queue::addToQueue(Group & aGroup) {
 					curr = curr->next;
 				}
 			}
+			back->next = front;
 			++size;
 		}
 	}

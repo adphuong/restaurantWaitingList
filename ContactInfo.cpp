@@ -72,8 +72,11 @@ void ContactInfo::init(const char * nameToInit, const char * emailToInit) {
  *	@returns - none
  *******************************************************************/
 ContactInfo::~ContactInfo() {
-	if (fullName || email) {
+	if (fullName) {
 		delete [] fullName;
+	}
+
+	if (email) {
 		delete [] email;
 	}
 }

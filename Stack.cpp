@@ -77,7 +77,7 @@ int Stack::getSize() const {
 
 
 /*************************** push() *********************************
- *	Adds contact info to the top of the stack
+ *	Adds new ContactInfo object to the top of the stack
  *
  *	@params - address of a person's contact info to add to stack
  *	@returns - true if added successfully, false otherwise

@@ -225,7 +225,7 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 
 	}
 	else {
-		cout << "Enter special seating (Highchair, Wheelchair, or None): " ;
+		cout << "Enter special seating (Booster or Wheelchair): " ;
 		cin.getline(seatingInfo, MAX_CHAR);
 	}
 	
