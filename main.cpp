@@ -64,12 +64,12 @@ void displayMenu() {
 	cout << setfill('-') << setw(100) << "-" << endl
 		 << "What would you like to do?" << endl
 		 << "[A] Add a group to the waitlist" << endl
-		 << "[B] Seat a group" << endl
-		 << "[C] Check who is next in line to be seated" << endl
+		 << "[B] Check next group in queue to be seated" << endl
+		 << "[C] Seat a group" << endl
 		 << "[D] Display the waitlist" << endl
-		 << "[E] Peek at top of Promo Contact stack" << endl
+		 << "[E] Peek at top of Promo Opt-in stack" << endl
 		 << "[F] Send promotion to recent group" << endl
-		 << "[G] Display contacts in promotional opt-in list" << endl
+		 << "[G] Display contacts in Promo opt-in list" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
 
@@ -95,10 +95,10 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 			addToWaitlist(aQueue, pos);
 			break;
 		case 'b':
-			seatGroup(aQueue, pos, aStack);
+			checkNextGroup(aQueue);	
 			break;
 		case 'c':
-			checkNextGroup(aQueue);
+			seatGroup(aQueue, pos, aStack);
 			break;
 		case 'd':
 			cout << aQueue << endl;

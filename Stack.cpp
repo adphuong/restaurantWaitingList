@@ -98,16 +98,18 @@ bool Stack::peek() const {
 
 
 void Stack::display(ostream & out) const {
-	cout << setfill('-') << setw(100) << "-" << endl;
-
-	cout << setfill(' ') <<setw(20) << left << "FULL NAME"
-		<< setw(12) << left << "EMAIL ADDRESS"
-		<< endl;
-	
-	cout << setfill('-') << setw(100) << "-" << endl;
-
 	if (size != 0) {
-		for (int i = 0; i < size; i++) {
+		cout << "Promotional opt-ins list of contacts:" << endl << endl;
+
+		cout << setfill('-') << setw(100) << "-" << endl;
+		
+		cout << setfill(' ') <<setw(20) << left << "FULL NAME"
+			 << setw(12) << left << "EMAIL ADDRESS"
+			 << endl;
+	
+		cout << setfill('-') << setw(100) << "-" << endl;	
+		
+		for (int i = size - 1; i >= 0; i--) {
 			out << setfill(' ') <<setw(20) << stackOfContacts[i]->getFullName()
 				<< setw(12) << left << stackOfContacts[i]->getEmail()
 				<< endl;
