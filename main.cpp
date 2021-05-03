@@ -69,6 +69,7 @@ void displayMenu() {
 		 << "[D] Display the waitlist" << endl
 		 << "[E] Peek at top of Promo Contact stack" << endl
 		 << "[F] Send promotion to recent group" << endl
+		 << "[G] Display contacts in promotional opt-in list" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
 

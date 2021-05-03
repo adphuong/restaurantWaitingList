@@ -114,7 +114,7 @@ void Stack::display(ostream & out) const {
 		}
 	}
 	else {
-		cout << "There are currently no contacts in the promotional list." 
+		cout << "There are currently no contacts in the promotional opt-in list." 
 			 << endl;
 	}
 
