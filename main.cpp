@@ -108,6 +108,9 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 		case 'f':
 			sendPromo(aStack);
 			break;
+		case 'g':
+			cout << aStack << endl;
+			break;
 		case 'q':
 			exit(1);
 			break;

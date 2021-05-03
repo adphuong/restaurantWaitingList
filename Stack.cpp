@@ -97,17 +97,27 @@ bool Stack::peek() const {
 }
 
 
-/*
 void Stack::display(ostream & out) const {
+	cout << setfill('-') << setw(100) << "-" << endl;
+
 	cout << setfill(' ') <<setw(20) << left << "FULL NAME"
 		<< setw(12) << left << "EMAIL ADDRESS"
 		<< endl;
 	
-	for (int i = 0; i < size; i++) {
-		out << stackOfContacts[i]->getFullName()
-			<< stackOfContacts[i]->getEmail()
-			<< endl;
+	cout << setfill('-') << setw(100) << "-" << endl;
+
+	if (size != 0) {
+		for (int i = 0; i < size; i++) {
+			out << setfill(' ') <<setw(20) << stackOfContacts[i]->getFullName()
+				<< setw(12) << left << stackOfContacts[i]->getEmail()
+				<< endl;
+		}
 	}
+	else {
+		cout << "There are currently no contacts in the promotional list." 
+			 << endl;
+	}
+
 }
 
 
@@ -117,7 +127,6 @@ ostream& operator<< (ostream & out, const Stack & aStack) {
 
 	return out;
 }
-*/
 
 
 void Stack::saveToFile(ContactInfo & aContact) {
