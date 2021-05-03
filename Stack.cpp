@@ -33,7 +33,6 @@ int Stack::getSize() const {
 
 bool Stack::push(const ContactInfo & aPerson) {
 	 stackOfContacts[size] = new ContactInfo(aPerson);
-
 	 size++;
 
 	 return true;

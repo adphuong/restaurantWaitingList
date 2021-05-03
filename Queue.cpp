@@ -1,22 +1,22 @@
 #include "Queue.h"
 
-Queue::Queue() : head(nullptr), tail(nullptr), size(0) {}
+Queue::Queue() : front(nullptr), back(nullptr), size(0) {}
 
 Queue::Queue(const Queue & aQueue) {
 	this->size = aQueue.size;
 
-	copy(aQueue.head, this->head);
+	copy(aQueue.front, this->front);
 }
 
 
 Queue::~Queue() {
-	destroy(this->head);
+	destroy(this->front);
 }
 
 
 void Queue::destroy(Node *& first) {
 	Node * curr = first;
-	Node * next = head->next;
+	Node * next = front->next;
 
 	if (next) {
 		curr->next = nullptr;
@@ -31,19 +31,19 @@ void Queue::destroy(Node *& first) {
 	}
 }
 
-void Queue::copy(Node * fromHead, Node *& toHead) {
+void Queue::copy(Node * fromfront, Node *& tofront) {
 	Node * currFrom;
 	Node * currTo;
 
-	if (!fromHead) {
-		toHead = nullptr;
+	if (!fromfront) {
+		tofront = nullptr;
 		return;
 	}
 
-	toHead = new Node(*(fromHead->data));
+	tofront = new Node(*(fromfront->data));
 
-	currFrom = fromHead->next;
-	currTo = toHead;
+	currFrom = fromfront->next;
+	currTo = tofront;
 
 	while (currFrom) {
 		currTo->next = new Node(*(currFrom->data));
@@ -105,42 +105,42 @@ void Queue::loadData(const char * filename) {
 
 void Queue::addToQueue(Group & aGroup) {
 	Node * temp = nullptr;
-	Node * headRef = head;
+	Node * frontRef = front;
 	Node * prev;
 	Node * curr;
 	Node * nodeToAdd = new Node(aGroup);
 
-	if (head == nullptr) {
-		head = nodeToAdd;
-		tail = nodeToAdd;
+	if (front == nullptr) {
+		front = nodeToAdd;
+		back = nodeToAdd;
 
-		head->next = head;
-		tail->next = head;
+		front->next = front;
+		back->next = front;
 
 		++size;
 	}
 	else {
-		if (nodeToAdd->data->getPosition() < head->data->getPosition()) {
-			temp = head;
-			head = nodeToAdd;
-			head->next = temp;
+		if (nodeToAdd->data->getPosition() < front->data->getPosition()) {
+			temp = front;
+			front = nodeToAdd;
+			front->next = temp;
 		
-			tail->next = head;
+			back->next = front;
 
 			++size;
 		}
-		else if (nodeToAdd->data->getPosition() > tail->data->getPosition()) {
-			tail->next = nodeToAdd;
-			tail = nodeToAdd;
+		else if (nodeToAdd->data->getPosition() > back->data->getPosition()) {
+			back->next = nodeToAdd;
+			back = nodeToAdd;
 
 			++size;
 		}
 		else {
-			prev = head;
-			curr = head->next;
+			prev = front;
+			curr = front->next;
 			
 			// while (Curr != nullptr)
-			while (curr != headRef) {
+			while (curr != frontRef) {
 				if (nodeToAdd->data->getPosition() < curr->data->getPosition())
 				{
 					prev->next = nodeToAdd;
@@ -161,24 +161,29 @@ void Queue::addToQueue(Group & aGroup) {
 
 bool Queue::enqueue(const Group & aGroup) {
 	Node * newNode = new Node(aGroup);
-	bool isAdded = false;
 
-	if (!head) {
-		head = tail = newNode;
-		head->next = tail->next = head;
+	return enqueue(newNode, front);
+}
+
+
+bool Queue::enqueue(Node * newNode, Node * front) {
+	if (!front) {
+		front = back = newNode;
+		front->next = back->next = front;
 		
-		isAdded = true;
+		return true;
 	}
 	else {
-		tail->next = newNode;
-		tail = newNode;
+		back->next = newNode;
+		back = newNode;
 
-		tail->next = head;
+		back->next = front;
 
-		isAdded = true;
+		return true;
 	}
 
-	return isAdded;
+	return enqueue(newNode, front->next);
+	
 }
 
 
@@ -187,31 +192,31 @@ bool Queue::dequeue(int & pos) {
 	int newPos;
 	Node * curr;
 
-	if (head) {
+	if (front) {
 		// Not empty, remove from front
-		Node * nodeToDelete = tail->next; 
+		Node * nodeToDelete = back->next; 
 
 		// Special Case: one node in queue
-		if (head == tail) {
-			head = nullptr;
-			tail = nullptr;
+		if (front == back) {
+			front = nullptr;
+			back = nullptr;
 		}
 		else {
-			head = head->next;
-			tail->next = head;			// THIS BUG TOOK FOREVER TO FIX
+			front = front->next;
+			back->next = front;			// THIS BUG TOOK FOREVER TO FIX
 
 			--pos;
 		}
 
 		// Update positions for groups currently in waitlist
-		curr = head;
-		while (curr->next != head) {
+		curr = front;
+		while (curr->next != front) {
 			newPos = curr->data->getPosition();
 			curr->data->setPosition(--newPos);
 
 			curr = curr->next;
 
-			//if (curr == head)
+			//if (curr == front)
 			//	break;
 		} 
 	
@@ -232,11 +237,11 @@ bool Queue::dequeue(int & pos) {
 
 
 Group Queue::peek() const {
-	if (head == nullptr) {
+	if (front == nullptr) {
 		cout << "peek() called with empty queue." << endl;
 	}
 
-	return *(head->data);
+	return *(front->data);
 }
 
 
@@ -247,7 +252,7 @@ ostream & operator<< (ostream & out, const Queue & aQueue) {
 }
 
 void Queue::printAll(ostream & out) const {
-	Node * curr = head;
+	Node * curr = front;
 
 	cout << setfill(' ') << setw(8) << left << "#"
 		 << setw(20) << left << "GROUP NAME" 
@@ -258,11 +263,11 @@ void Queue::printAll(ostream & out) const {
 
 	cout << setfill('-') << setw(100) << "-" << endl;
 	
-	while (head != nullptr) {
+	while (front != nullptr) {
 		out << *(curr->data) << endl;
 		curr = curr->next;
 
-		if (curr == head)
+		if (curr == front)
 			break;
 	}
 

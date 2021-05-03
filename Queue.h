@@ -36,9 +36,12 @@ class Queue {
 			Node * next;
 		};
 
-		Node *head, *tail;
+		Node *front, *back;
 		int size;
-		
+	
+		// Recursive function for enqueue
+		bool enqueue(Node * newNode, Node * front);
+
 		void addToQueue(Group & aGroup);
 		void printAll(ostream & out) const;
 
