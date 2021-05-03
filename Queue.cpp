@@ -72,6 +72,9 @@ void Queue::destroy(Node *& first) {
 
 		curr = next;
 	}
+
+	front = nullptr;
+	back = nullptr;
 }
 
 
@@ -327,7 +330,6 @@ bool Queue::dequeue(int & pos) {
 		nodeToDelete->next = nullptr;
 		delete nodeToDelete;
 		nodeToDelete = nullptr;
-		
 
 		result = true;
 	}

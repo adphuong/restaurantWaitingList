@@ -55,6 +55,12 @@ int main() {
 }
 
 
+/************************** welcome() *******************************
+ *  Displays welcome message to user
+ *
+ *	@params - none 
+ *	@returns - none 
+ *******************************************************************/
 void welcome() {
 	cout << endl;
 
@@ -62,6 +68,12 @@ void welcome() {
 }
 
 
+/************************** successLoad() **************************
+ *  Displays success message if queue was loaded
+ *
+ *	@params - size of queue 
+ *	@returns - none 
+ *******************************************************************/
 void successLoad(int size) {
 	cout << endl
 		 << setfill('*') << setw(100) << "*" << endl
@@ -71,6 +83,12 @@ void successLoad(int size) {
 }
 
 
+/************************** displayMenu() **************************
+ *  Displays menu options
+ *
+ *	@params - none 
+ *	@returns - none 
+ *******************************************************************/
 void displayMenu() {
 	cout << setfill('-') << setw(100) << "-" << endl
 		 << "What would you like to do?" << endl
@@ -87,6 +105,12 @@ void displayMenu() {
 }
 
 
+/************************** displayMenu() **************************
+ *  Prompts user to enter a command to execute 
+ *
+ *	@params - none 
+ *	@returns - none 
+ *******************************************************************/
 char getCommand() {
 	char input;
 
@@ -100,6 +124,12 @@ char getCommand() {
 }
 
 
+/**************************** execute() *****************************
+ *  Executes the command chosen by user 
+ *
+ *	@params - input, aQueue, and aStack to pass into functions 
+ *	@returns - none 
+ *******************************************************************/
 void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 	switch (input) {
 		case 'a':
@@ -135,6 +165,15 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 }
 
 
+/************************** addToWaitlist() ************************
+ *  Prompts user for group name, num of people, if they want special 
+ *	seating, special seating info if yes, if they want to opt-in 
+ *	for promo materials. Then stores in temp variables. Queue's 
+ *	enqueue will be called with the group data to add to the queue.
+ *
+ *	@params - aQueue and pos (keeps track of each group's num in line) 
+ *	@returns - none 
+ *******************************************************************/
 void addToWaitlist(Queue & aQueue, int & pos) {
 	char groupName[MAX_CHAR];
 	int num;
@@ -228,11 +267,20 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 }
 
 
+/************************** seatGroup() *****************************
+ *  Before seating group, user will be prompted for contact info if 
+ *	they opted-in for it earlier. The new contact info will be pushed
+ *	to the stack and Queue's dequeue will be called to seat the group.
+ *
+ *	@params - aQueue, aStack, and pos (keeps track of each group's num in line) 
+ *	@returns - none 
+ *******************************************************************/
 void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 	Group groupToSeat = aQueue.peek();
 	char fullName[MAX_CHAR];
 	char email[MAX_CHAR];
 
+	// Prompt for contact info to add to stack
 	if (groupToSeat.getOptedIn()) {
 		cout << "Our records indicate that you opted in for our promo mailing list!" 
 			 << endl << endl
@@ -249,6 +297,7 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 		aStack.push(tempContact);	
 	}
 
+	// Seat group
 	bool isSeated = aQueue.dequeue(pos);
 	
 	if (isSeated) {
@@ -263,6 +312,13 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 }
 
 
+
+/************************** checkNextGroup() **************************
+ *  Queue's peek() is called to check the group that is next in line
+ *
+ *	@params - aQueue 
+ *	@returns - none 
+ *******************************************************************/
 void checkNextGroup(Queue & aQueue) {
 	Group nextGroup = aQueue.peek();
 
@@ -284,6 +340,14 @@ void checkNextGroup(Queue & aQueue) {
 	
 }
 
+
+/************************** sendPromo() ****************************
+ *  Stack's pop() will be called to send promo to contact at the top
+ *	of the stack
+
+ *	@params - aStack 
+ *	@returns - none 
+ *******************************************************************/
 void sendPromo(Stack & aStack) {
 	bool promoSent = false;
 
@@ -297,6 +361,13 @@ void sendPromo(Stack & aStack) {
 }
 
 
+/************************** peekStack() ****************************
+ *  Stack's peek() will be called to print the contact info at the top
+ *	of the stack
+
+ *	@params - aStack 
+ *	@returns - none 
+ *******************************************************************/
 void peekStack(Stack & aStack) {
 	bool topFound;
 
