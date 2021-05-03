@@ -74,13 +74,12 @@ bool Stack::pop() {
 }
 
 
-ContactInfo Stack::peek() const {
+bool Stack::peek() const {
 	char tempName[TMP_CAP];
 	char tempEmail[TMP_CAP];
 	
 	if (size == 0) {
-		cout << "Stack is empty. Program terminating." << endl << endl;
-		exit(1);
+		return false;
 	}
 
 	// Gets last data info from array and stores in temp variables
@@ -88,9 +87,13 @@ ContactInfo Stack::peek() const {
 	strcpy(tempEmail, stackOfContacts[size - 1]->getEmail());
 
 	// Create new ContactInfo object with temp variables and save it to file
-	ContactInfo tempContact(tempName, tempEmail);
+	ContactInfo topContact(tempName, tempEmail);
 
-	return tempContact;
+	cout << "Contact at the top of the stack: " << endl << endl
+		 << topContact
+		 << endl;
+	
+	return true;
 }
 
 

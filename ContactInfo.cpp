@@ -22,7 +22,7 @@ void ContactInfo::init(const char * nameToInit, const char * emailToInit) {
 }
 
 ContactInfo::~ContactInfo() {
-	if (fullName != nullptr || email != nullptr) {
+	if (fullName || email) {
 		delete [] fullName;
 		delete [] email;
 	}

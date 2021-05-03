@@ -57,14 +57,13 @@ int Queue::getSize() const {
 	return size;
 }
 
-int Queue::loadData(const char * filename) {
+void Queue::loadData(const char * filename) {
 	int position;
 	char groupName[MAX_CHAR];
 	int num;
 	bool isSpecial;
 	char specialInfo[MAX_CHAR];
 	bool isOptedIn;
-	int numPromos = 0;
 
 	ifstream inFile;
 	inFile.open(filename);
@@ -90,17 +89,17 @@ int Queue::loadData(const char * filename) {
 		inFile >> isOptedIn;
 		inFile.ignore();
 
+		/*
 		if (isOptedIn) {
 			++numPromos;
 		}
+		*/
 
 		Group tempGroup(position, groupName, num, isSpecial, specialInfo, isOptedIn);
 		addToQueue(tempGroup);
 	}
 
 	inFile.close();
-
-	return numPromos;
 }
 
 

@@ -4,13 +4,14 @@ int MAX = 101;
 int main() {
 	Queue aQueue;
 	int count;
-	int numPromoContacts = 0;
 	char command;
 	char filename[] = "queueData.txt";
 
 	welcome();
-	numPromoContacts = aQueue.loadData(filename);
+	aQueue.loadData(filename);
 
+
+	// Initializing stack size to 0 since we are dynamically allocating
 	Stack aStack(0);
 
 	count = aQueue.getSize();
@@ -66,8 +67,8 @@ void displayMenu() {
 		 << "[B] Seat a group" << endl
 		 << "[C] Check who is next in line to be seated" << endl
 		 << "[D] Display the waitlist" << endl
-		 << "[E] Send promotion to recent group" << endl
-		 << "[F] Peek at top of Promo Contact stack" << endl
+		 << "[E] Peek at top of Promo Contact stack" << endl
+		 << "[F] Send promotion to recent group" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
 
@@ -102,10 +103,10 @@ void execute(char input, Queue & aQueue, int & pos, Stack & aStack) {
 			cout << aQueue << endl;
 			break;
 		case 'e':
-			sendPromo(aStack);
+			peekStack(aStack);	
 			break;
 		case 'f':
-			peekStack(aStack);	
+			sendPromo(aStack);
 			break;
 		case 'q':
 			exit(1);
@@ -282,10 +283,12 @@ void sendPromo(Stack & aStack) {
 
 
 void peekStack(Stack & aStack) {
-	ContactInfo recentPerson;
+	bool topFound;
 
-	recentPerson = aStack.peek();
+	topFound = aStack.peek();
 
-	cout << "Contact at top of stack: " << endl
-		 << recentPerson << endl;
+	if (!topFound) {
+		cout << "There are currently no contacts on the stack list." 
+			 << endl << endl;
+	}
 }

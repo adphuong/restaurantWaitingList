@@ -15,7 +15,7 @@ class Stack {
 	 	
 		bool push(const ContactInfo & aPerson);
 		bool pop();
-		ContactInfo peek() const;
+		bool peek() const;
 		
 		int getSize() const;
 

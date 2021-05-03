@@ -13,7 +13,7 @@ class Queue {
 
 		Queue& operator= (const Queue & aQueue);
 	 	
-		int loadData(const char * filename);	
+		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
 		bool dequeue(int & pos);
 		Group peek() const;
