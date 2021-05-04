@@ -83,8 +83,9 @@ int Stack::getSize() const {
  *	@returns - true if added successfully, false otherwise
  *******************************************************************/
 bool Stack::push(const ContactInfo & aPerson) {
-	 stackOfContacts[size] = new ContactInfo(aPerson);
-	 size++;
+	 ++size;
+	 stackOfContacts[size - 1] = new ContactInfo(aPerson);
+	 //size++;
 
 	 return true;
 }
@@ -115,10 +116,12 @@ bool Stack::pop() {
 	cout << "Successfully sent promo materials to: " 
 		 << endl << endl
 		 << tempContact << endl;
-
+	
+	delete stackOfContacts[size - 1]; 
+	
 	// Reset array index we just popped off and dec. size
-	stackOfContacts[size - 1]->setFullName(nullptr);
-	stackOfContacts[size - 1]->setEmail(nullptr);
+	//stackOfContacts[size - 1]->setFullName(nullptr);
+	//stackOfContacts[size - 1]->setEmail(nullptr);
 	size--; 
 
 	return true;

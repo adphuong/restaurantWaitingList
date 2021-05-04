@@ -242,7 +242,6 @@ void Queue::addToQueue(Group & aGroup) {
 					curr = curr->next;
 				}
 			}
-			back->next = front;
 			++size;
 		}
 	}
