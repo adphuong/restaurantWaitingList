@@ -41,6 +41,7 @@ int main() {
 	successLoad(count);
 
 	// Print queue list and menu, then get command from user
+	// Uses overloaded << to print queue data
 	cout << aQueue << endl;
 	displayMenu();
 	command = getCommand();
@@ -77,7 +78,8 @@ void welcome() {
 void successLoad(int size) {
 	cout << endl
 		 << setfill('*') << setw(100) << "*" << endl
-		 << "There are currently " << size << " groups on the waiting list." << endl
+		 << "There are currently " << size << " groups on the waiting list."
+		 << endl 
 		 << setfill('*') << setw(100) << "*" 
 		 << endl << endl;
 }
@@ -114,7 +116,7 @@ void displayMenu() {
 char getCommand() {
 	char input;
 
-	cout << "Please pick a command from the menu (A, B, C, D, Q): ";
+	cout << "Please enter a command from the menu above (A, B, C, D, Q): ";
 	cin >> input;
 
 	cin.ignore(100, '\n');

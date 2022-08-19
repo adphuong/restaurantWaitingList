@@ -15,8 +15,9 @@
  *	@params - none
  *	@returns - none
  *******************************************************************/
-Group::Group() : position(0), groupName(nullptr), numPeople(0), isSpecialSeating(false),
-				 specialSeatingInfo(nullptr), isOptInPromos(false) {}
+Group::Group() : position(0), groupName(nullptr), numPeople(0), 
+				 isSpecialSeating(false), specialSeatingInfo(nullptr), 
+				 isOptInPromos(false) {}
 
 
 /******************************* Group() ****************************
@@ -38,8 +39,9 @@ Group::Group(int pos, char gName[], int numPersons, bool isSpecial,
  *	@returns - none
  *******************************************************************/
 Group::Group(const Group & aGroup) {
-	init(aGroup.position, aGroup.groupName, aGroup.numPeople, aGroup.isSpecialSeating,
-		 aGroup.specialSeatingInfo, aGroup.isOptInPromos);
+	init(aGroup.position, aGroup.groupName, aGroup.numPeople,
+		 aGroup.isSpecialSeating, aGroup.specialSeatingInfo, 
+		 aGroup.isOptInPromos);
 }
 
 
@@ -64,7 +66,7 @@ Group::~Group() {
  *	@returns - none
  *******************************************************************/
 void Group::init(int pos, const char * gName, int num, bool isSpecial, 
-				 const char * specialSeatInfo, bool isOptPromos) {
+				 const char * newSpecialSeatInfo, bool isOptPromos) {
 	position = pos;
 
 	groupName = new char[strlen(gName) + 1];
@@ -74,8 +76,8 @@ void Group::init(int pos, const char * gName, int num, bool isSpecial,
 
 	isSpecialSeating = isSpecial;
 
-	specialSeatingInfo = new char[strlen(specialSeatInfo) + 1];
-	strcpy(specialSeatingInfo, specialSeatInfo);
+	specialSeatingInfo = new char[strlen(newSpecialSeatInfo) + 1];
+	strcpy(specialSeatingInfo, newSpecialSeatInfo);
 
 	isOptInPromos = isOptPromos;
 }
@@ -101,7 +103,8 @@ Group &Group::operator=(const Group &toBeCopied) {
 	}
 
 	init(toBeCopied.position, toBeCopied.groupName, toBeCopied.numPeople, 
-		 toBeCopied.isSpecialSeating, toBeCopied.specialSeatingInfo, toBeCopied.isOptInPromos);
+		 toBeCopied.isSpecialSeating, toBeCopied.specialSeatingInfo, 
+		 toBeCopied.isOptInPromos);
 	
 	return *this;
 }

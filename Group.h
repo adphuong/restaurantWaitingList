@@ -31,7 +31,7 @@ class Group {
 	public:
 		Group();
 		Group(int pos, char gName[], int numPersons, bool isSpecial, char specialInfo[], 
-			 bool optInPromos);
+			  bool optInPromos);
 		Group(const Group & aGroup);
 		~Group();
 
