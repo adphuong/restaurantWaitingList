@@ -1,3 +1,11 @@
+/********************************************************************
+ *	File:			ContactInfo.h
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This is the header file for ContactInfo ADT
+ *******************************************************************/
+
 #ifndef CONTACTINFO_H
 #define CONTACTINFO_H
 

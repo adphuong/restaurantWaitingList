@@ -1,3 +1,11 @@
+/********************************************************************
+ *	File:			Queue.h
+ *	Assignment: 	02 - Stacks & Queues for Restaurant Waiting List
+ *	Author:			April Phuong
+ *	Date:			May 2, 2021
+ *	Description:	This is the header file for Queue ADT
+ *******************************************************************/
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -13,7 +21,7 @@ class Queue {
 
 		Queue& operator= (const Queue & aQueue);
 	 	
-		void loadData(const char * filename, int & promoContacts);	
+		void loadData(const char * filename);	
 		bool enqueue(const Group & aGroup);
 		bool dequeue(int & pos);
 		Group peek() const;
@@ -36,9 +44,12 @@ class Queue {
 			Node * next;
 		};
 
-		Node *head, *tail;
+		Node *front, *back;
 		int size;
-		
+	
+		// Recursive function for enqueue
+		bool enqueue(Node * newNode, Node * front);
+
 		void addToQueue(Group & aGroup);
 		void printAll(ostream & out) const;
 

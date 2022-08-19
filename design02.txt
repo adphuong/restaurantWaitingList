@@ -1,0 +1,193 @@
+April Phuong
+CS260 - Data Structures
+
+-------------------------------------------------------------------------------
+ASSIGNMENT #2 Design Write-up
+-------------------------------------------------------------------------------
+
+Program Description:
+	This program keeps track of a restaurant's 
+ 	waiting list. It utilizes a circular linked list
+ 	to build, traverse, add, and remove from the 
+ 	Queue of groups. A dynamic array is will keep
+ 	track of a Stack of people who opt in to be on the 
+ 	contact list for promotional material.
+ 	
+ 	The user will be able to perform the following:
+ 		- Add new group to queue
+ 		- Check next group in queue to be seated
+ 		- Seat a group
+ 		- Display the waitlist
+ 		- Peek at top of Promo Opt-in stack
+ 		- Send promotion to recent opt-in group
+ 		- Display contacts in Promo opt-in list
+
+	Queue, Group, Stack, and ContactInfo are the ADTs
+ 	utilized in this menu-driven program.
+
+
+
+-------------------------------------------------------------------------------
+PART 1: The Queue ADT		Circular Linked List
+-------------------------------------------------------------------------------
+Private data members for Queue
+	- Node *front, *back
+		- Node contains *data and *next
+	- size to keep track of queue size
+
+
+Public member functions:
+	- Default constructor & Copy Constructor
+ 	- Destructor
+ 	- Getter: getSize() & loadData()
+	- Overloaded (=) and (<<) operators
+	- Queue operations: 
+ 	- enqueue(), dequeue(), peek()
+ 	- Private member functions:
+ 		- addToQueue(), printAll(), copy(), destroy()
+
+
+Algorithms for each major Queue operation:
+	In enqueue() function::
+	1. Create a pointer to a new node with Node constructor and pass
+       in the group we want to add to the queue
+	2. If the list is empty:
+		a. Set front and back pointers to point to the new node
+		b. Update front and back's next to point to new node as well
+		   since we are using circular linked list
+	3. Else, list is not empty:
+		a. append the node to the back/end of the queue
+		b. set back equal to new node
+		c. update back->next to point to the first node of the queue
+
+	
+	In dequeue():
+	1. If list is not empty:
+		a. Create temp node to point to first node in the queue (we want to
+		   delete this)
+		b. If there is only one node in the list, set front and back pointers
+		   to null
+		c. Otherwise, have front point to whatever next node is 
+		d. Update back->next to point to front
+		e. Delete the temp node we created earlier
+		f. since we are using numbered positions, want to update it here as
+		   well to reflect when we print out the list again
+
+	In peek():
+	1. If front pointer is null, print message letting user know list is empty
+	2. Otherwise, get the first data that front is poitning to and return that
+
+
+-----------------------------------------------------------------------------
+Part II: The Stack ADT		Dynamically allocated array
+----------------------------------------------------------------------------- 
+
+Private data members for Queue
+	- ContactInfo ** stack
+	- int size
+
+
+Public member functions:
+	- Default constructor & Copy Constructor
+ 	- Destructor
+ 	- Getter: getSize()
+ 	- Overloaded (=) and (<<) operators
+ 	- Stack operations:
+ 		- push(), pop(), peek()
+ 	- Private member functions:
+ 		- destroy(), copy(), display(), saveToFile()
+
+
+Algorithms for each major Stack operation:
+	In push() function::
+	1. Allocate new memory to add new contact info by calling 'new'
+	2. update size
+	
+	In pop():
+	1. If list is empty, return false
+	2. Create temp variables to hold name and email
+	3. get the contact inforation data taht is at the top of the stack
+	4. create a temporary ContactInfo object with that info
+	5. Print that contact information
+	6. decrement size
+	7. return true
+
+	In peek():
+	1. If stack is empty, return false
+	2. Create temp variables to hold name and email
+	3. get the contact inforation data taht is at the top of the stack
+	4. create a temporary ContactInfo object with that info
+	5. Print that contact information
+
+
+-----------------------------------------------------------------------------
+Part III: The Driver / Test Program / Main
+-----------------------------------------------------------------------------
+
+Functions:
+	void welcome();
+	void successLoad(int size);
+	void displayMenu();
+	char getCommand();
+	void execute(char input, Queue & aQueue, int & pos, Stack & aStack);
+	void addToWaitlist(Queue & aQueue, int & pos);
+	void seatGroup(Queue & aQueue, int & pos, Stack & aStack);
+	void checkNextGroup(Queue & aQueue);
+	void sendPromo(Stack & aStack);
+	void peekStack(Stack & aStack);
+
+
+Algorithms:
+	In main():
+    1. Create Queue object and local variables
+    2. Display welcome message 
+    3. Load data from file 
+    3. If file is successfully loaded, print success message to user
+    4. Print list of groups in queue 
+    5. Display menu options to user
+    6. Prompt and read user's option input
+    7. If user option is 'a' (adding group) 
+            a. Call addToWaitlist() 
+    8. If user option is 'b' (check next group to be seated)
+            a. Call checkNextGroup() with SongList object passed in. 
+    9. If user option is 'c' (seat group)
+            a. Call seatGroup()
+    10. If user option is 'd' (display queue list)
+            a. print list with << 
+    11. If user option is 'e' (peek at top of stack)
+            a. Call peekstack() 
+	12. If user option is 'f' (send promo)
+            a. Call sendPromo() 
+	13. If user option is 'g' (display stack list)
+            a. print stack with << 
+    14. Do steps 5-13 until user enters 'q', which will quit the program
+	
+
+	In addToWaitlist():
+	1. Setup local variables: char groupName, int num, bool specialSeating, char  
+	   seatingInfo, bool optInPromos, bool isAdded
+    2. Prompt user for groupName, num, specialSeating, optInPromos, isAdded i
+	   and store into respective variables
+    3. Check to make sure input for num is valid
+            a. Input must not be less than 0
+            b. If invalid, print error and prompt user again for num
+    4. Now we want to save all the data we just received from the user into a
+	   temporary Group object. We can do this by creating a new Group object using the 
+	   constructor with arguments.
+    5. Call enqueue and pass in this temp Group object as an argument 
+    6. Increment pos since that keeps track of number for each group in the
+	   queue
+    7. If we got to this point, that means we've successfully added a new song, so we can print 
+       that to user
+
+
+	In seatGroup():
+	Before we seat the group, need to ask for contact info if they opted
+	in to receiving promo materials earlier
+	1. Grab the group we want to seat by calling peek()
+	2. Check if that group opted in for promos
+	3. If they did, prompt for full name and email and store in variables
+	4. Create a ContactInfo object with that new data
+	5. Push this ContactInfo object onto the stack
+	6. Now we can call dequeue() to actually seat the group
+	7. Print success message if group was seated, otherwise error message
