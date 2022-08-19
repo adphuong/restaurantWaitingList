@@ -9,7 +9,7 @@ Program Description:
 	This program keeps track of a restaurant's 
  	waiting list. It utilizes a circular linked list
  	to build, traverse, add, and remove from the 
- 	Queue of groups and also a dynamic array to keep
+ 	Queue of groups. A dynamic array is will keep
  	track of a Stack of people who opt in to be on the 
  	contact list for promotional material.
  	
@@ -19,7 +19,7 @@ Program Description:
  		- Seat a group
  		- Display the waitlist
  		- Peek at top of Promo Opt-in stack
- 		- Send promotion to recent group
+ 		- Send promotion to recent opt-in group
  		- Display contacts in Promo opt-in list
 
 	Queue, Group, Stack, and ContactInfo are the ADTs
