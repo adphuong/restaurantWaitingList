@@ -1,10 +1,10 @@
-Phuong Family,7,2,1,Wheelchair and Booster,0
-Michael,1,6,1,Wheelchar,1
-April,5,3,1,Booster,0
-The Jetsons,3,4,0,None,0
-The Starks,2,8,1,Booster,1
-The Simpsons,6,6,0,None,0
-Pokemon,4,1,1,Booster,1
-Rubiks Group,8,2,0,None,0
-Beyonce,9,4,1,Booster,0
-Romeo & Juliet,10,2,0,None,1
+Master Roshi,7,2,1,Wheelchair and Booster,0
+Piccolo,1,6,1,None,1
+Goku,5,3,1,Booster,0
+Vegeta,3,4,0,None,0
+Naruto,2,8,1,Booster,1
+Sasuke,6,6,0,None,0
+Hisoka,4,1,1,Booster,1
+Tsunade,8,2,0,None,0
+Totoro,9,4,1,Booster,0
+Eren Yeager,10,2,0,None,1

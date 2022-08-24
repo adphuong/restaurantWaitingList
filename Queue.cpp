@@ -374,7 +374,7 @@ void Queue::printAll(ostream & out) const {
 	Node * curr = front;
 
 	cout << setfill(' ') << setw(8) << left << "#"
-		 << setw(20) << left << "GROUP NAME" 
+		 << setw(20) << left << "PARTY NAME" 
 		 << setw(12) << left << "# PEOPLE" 
 		 << setw(15) << left << "SPECIAL SEAT"
 		 << setw(30) << left << "INFO"

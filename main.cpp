@@ -65,7 +65,7 @@ int main() {
 void welcome() {
 	cout << endl;
 
-	cout << "Hello! Welcome to My Fancy Restaurant." << endl;
+	cout << "Hello! Welcome to WISH YOU WERE BEER" << endl;
 }
 
 
@@ -78,7 +78,7 @@ void welcome() {
 void successLoad(int size) {
 	cout << endl
 		 << setfill('*') << setw(100) << "*" << endl
-		 << "There are currently " << size << " groups on the waiting list."
+		 << "There are currently " << size << " parties on the waiting list."
 		 << endl 
 		 << setfill('*') << setw(100) << "*" 
 		 << endl << endl;
@@ -94,12 +94,12 @@ void successLoad(int size) {
 void displayMenu() {
 	cout << setfill('-') << setw(100) << "-" << endl
 		 << "What would you like to do?" << endl
-		 << "[A] Add a group to the waitlist" << endl
-		 << "[B] Check next group in queue to be seated" << endl
-		 << "[C] Seat a group" << endl
-		 << "[D] Display the waitlist" << endl
+		 << "[A] Add party to waitlist" << endl
+		 << "[B] Check next party in queue to be seated" << endl
+		 << "[C] Seat a party" << endl
+		 << "[D] Display waitlist" << endl
 		 << "[E] Peek at top of Promo Opt-in stack" << endl
-		 << "[F] Send promotion to recent group" << endl
+		 << "[F] Send promotion to recent party" << endl
 		 << "[G] Display contacts in Promo opt-in list" << endl
 		 << "[Q] Quit program" << endl
 		 << setfill('-') << setw(100) << "-" << endl;
@@ -185,12 +185,12 @@ void addToWaitlist(Queue & aQueue, int & pos) {
 	bool isAdded;
 
 	// Get group name
-	cout << "Enter your group name: " ;
+	cout << "Enter your party name: " ;
 	cin.getline(groupName, MAX_CHAR);
 
 
 	// Get num of people and do some checking and clearing
-	cout << "Enter the number of people in your group: ";
+	cout << "Enter the number of people in your party: ";
 	cin >> num;
 
 	while (cin.fail() || num <= 0) {
@@ -301,11 +301,11 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 	
 	if (isSeated) {
 		cout << endl;
-		cout << "GROUP HAS BEEN SEATED!" << endl << endl;
+		cout << "PARTY HAS BEEN SEATED!" << endl << endl;
 	}
 
 	else {
-		cout << "Oops, looks like the group has to wait a little longer!" 
+		cout << "Oops, looks like the party has to wait a little longer!" 
 		 	 << endl;
 	}
 }
@@ -321,10 +321,10 @@ void seatGroup(Queue & aQueue, int & pos, Stack & aStack) {
 void checkNextGroup(Queue & aQueue) {
 	Group nextGroup = aQueue.peek();
 
-	cout << "THE NEXT GROUP TO BE SEATED IS: " << endl << endl;
+	cout << "THE NEXT PARTY TO BE SEATED IS: " << endl << endl;
 	
 	cout << setfill(' ') << setw(8) << left << "#"
-		 << setw(20) << left << "GROUP NAME" 
+		 << setw(20) << left << "PARTY NAME" 
 		 << setw(12) << left << "# PEOPLE" 
 		 << setw(15) << left << "SPECIAL SEAT"
 		 << setw(30) << left << "INFO"
