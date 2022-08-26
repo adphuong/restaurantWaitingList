@@ -26,15 +26,17 @@ Queue of parties. A dynamic array is will keep track of a Stack of people who op
 <img src='assets/peekAndSend.gif' title='check recent promo contact' width='90%' alt=''/>  
 
 
-
-## How to run the program
-### In the terminal, run the following:
+ ## Compiling and running code (with makefile):
+Command to run on terminal:             
 ```
 make
+```
+Command to execute program:             
+```
 ./main
 ```
-
-### To clean up files:
+Command to remove .exe and files generated:        
 ```
 make clean
 ```
+
