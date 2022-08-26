@@ -7,7 +7,25 @@ Queue of parties. A dynamic array is will keep track of a Stack of people who op
 
 ### Adding a party to the waitlist
 
-<img src='assets/addParty.gif' title='adding a party' width='' alt='Video Walkthrough'/>  
+<img src='assets/addParty.gif' title='adding a party' width='90%' alt=''/>  
+
+### Checking next party in the waitlist
+
+<img src='assets/checkNextParty.gif' title='checking next party' width='90%' alt=''/>  
+
+### Seating a party 
+
+<img src='assets/seatParty.gif' title='seating a party' width='90%' alt=''/>  
+
+### Display list of contacts in the Promotions list
+
+<img src='assets/displayContactsPromo.gif' title='display promotional contacts' width='90%' alt=''/>  
+
+### Check most recent contact in Promotions list and send them promotional material
+
+<img src='assets/peekAndSend.gif' title='check recent promo contact' width='90%' alt=''/>  
+
+
 
 ## How to run the program
 ### In the terminal, run the following:
